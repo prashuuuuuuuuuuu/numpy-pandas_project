@@ -1,0 +1,5005 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "24e74456-b833-4f6f-bf22-e831d2ea5381",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "b761c156-bc7b-490d-b9cb-352355e90913",
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "FileNotFoundError",
+     "evalue": "[Errno 2] No such file or directory: 'retail_sales_analysis_dataset.csv'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[31m---------------------------------------------------------------------------\u001b[39m",
+      "\u001b[31mFileNotFoundError\u001b[39m                         Traceback (most recent call last)",
+      "\u001b[36mCell\u001b[39m\u001b[36m \u001b[39m\u001b[32mIn[2]\u001b[39m\u001b[32m, line 1\u001b[39m\n\u001b[32m----> \u001b[39m\u001b[32m1\u001b[39m df = \u001b[43mpd\u001b[49m\u001b[43m.\u001b[49m\u001b[43mread_csv\u001b[49m\u001b[43m(\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mretail_sales_analysis_dataset.csv\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m)\u001b[49m\n",
+      "\u001b[36mFile \u001b[39m\u001b[32m~\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py:873\u001b[39m, in \u001b[36mread_csv\u001b[39m\u001b[34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, skip_blank_lines, parse_dates, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, low_memory, memory_map, float_precision, storage_options, dtype_backend)\u001b[39m\n\u001b[32m    861\u001b[39m kwds_defaults = _refine_defaults_read(\n\u001b[32m    862\u001b[39m     dialect,\n\u001b[32m    863\u001b[39m     delimiter,\n\u001b[32m   (...)\u001b[39m\u001b[32m    869\u001b[39m     dtype_backend=dtype_backend,\n\u001b[32m    870\u001b[39m )\n\u001b[32m    871\u001b[39m kwds.update(kwds_defaults)\n\u001b[32m--> \u001b[39m\u001b[32m873\u001b[39m \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[43m_read\u001b[49m\u001b[43m(\u001b[49m\u001b[43mfilepath_or_buffer\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mkwds\u001b[49m\u001b[43m)\u001b[49m\n",
+      "\u001b[36mFile \u001b[39m\u001b[32m~\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py:300\u001b[39m, in \u001b[36m_read\u001b[39m\u001b[34m(filepath_or_buffer, kwds)\u001b[39m\n\u001b[32m    297\u001b[39m _validate_names(kwds.get(\u001b[33m\"\u001b[39m\u001b[33mnames\u001b[39m\u001b[33m\"\u001b[39m, \u001b[38;5;28;01mNone\u001b[39;00m))\n\u001b[32m    299\u001b[39m \u001b[38;5;66;03m# Create the parser.\u001b[39;00m\n\u001b[32m--> \u001b[39m\u001b[32m300\u001b[39m parser = \u001b[43mTextFileReader\u001b[49m\u001b[43m(\u001b[49m\u001b[43mfilepath_or_buffer\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43m*\u001b[49m\u001b[43m*\u001b[49m\u001b[43mkwds\u001b[49m\u001b[43m)\u001b[49m\n\u001b[32m    302\u001b[39m \u001b[38;5;28;01mif\u001b[39;00m chunksize \u001b[38;5;129;01mor\u001b[39;00m iterator:\n\u001b[32m    303\u001b[39m     \u001b[38;5;28;01mreturn\u001b[39;00m parser\n",
+      "\u001b[36mFile \u001b[39m\u001b[32m~\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py:1645\u001b[39m, in \u001b[36mTextFileReader.__init__\u001b[39m\u001b[34m(self, f, engine, **kwds)\u001b[39m\n\u001b[32m   1642\u001b[39m     \u001b[38;5;28mself\u001b[39m.options[\u001b[33m\"\u001b[39m\u001b[33mhas_index_names\u001b[39m\u001b[33m\"\u001b[39m] = kwds[\u001b[33m\"\u001b[39m\u001b[33mhas_index_names\u001b[39m\u001b[33m\"\u001b[39m]\n\u001b[32m   1644\u001b[39m \u001b[38;5;28mself\u001b[39m.handles: IOHandles | \u001b[38;5;28;01mNone\u001b[39;00m = \u001b[38;5;28;01mNone\u001b[39;00m\n\u001b[32m-> \u001b[39m\u001b[32m1645\u001b[39m \u001b[38;5;28mself\u001b[39m._engine = \u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43m_make_engine\u001b[49m\u001b[43m(\u001b[49m\u001b[43mf\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43mengine\u001b[49m\u001b[43m)\u001b[49m\n",
+      "\u001b[36mFile \u001b[39m\u001b[32m~\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\pandas\\io\\parsers\\readers.py:1904\u001b[39m, in \u001b[36mTextFileReader._make_engine\u001b[39m\u001b[34m(self, f, engine)\u001b[39m\n\u001b[32m   1902\u001b[39m     \u001b[38;5;28;01mif\u001b[39;00m \u001b[33m\"\u001b[39m\u001b[33mb\u001b[39m\u001b[33m\"\u001b[39m \u001b[38;5;129;01mnot\u001b[39;00m \u001b[38;5;129;01min\u001b[39;00m mode:\n\u001b[32m   1903\u001b[39m         mode += \u001b[33m\"\u001b[39m\u001b[33mb\u001b[39m\u001b[33m\"\u001b[39m\n\u001b[32m-> \u001b[39m\u001b[32m1904\u001b[39m \u001b[38;5;28mself\u001b[39m.handles = \u001b[43mget_handle\u001b[49m\u001b[43m(\u001b[49m\n\u001b[32m   1905\u001b[39m \u001b[43m    \u001b[49m\u001b[43mf\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1906\u001b[39m \u001b[43m    \u001b[49m\u001b[43mmode\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1907\u001b[39m \u001b[43m    \u001b[49m\u001b[43mencoding\u001b[49m\u001b[43m=\u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43moptions\u001b[49m\u001b[43m.\u001b[49m\u001b[43mget\u001b[49m\u001b[43m(\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mencoding\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;28;43;01mNone\u001b[39;49;00m\u001b[43m)\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1908\u001b[39m \u001b[43m    \u001b[49m\u001b[43mcompression\u001b[49m\u001b[43m=\u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43moptions\u001b[49m\u001b[43m.\u001b[49m\u001b[43mget\u001b[49m\u001b[43m(\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mcompression\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;28;43;01mNone\u001b[39;49;00m\u001b[43m)\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1909\u001b[39m \u001b[43m    \u001b[49m\u001b[43mmemory_map\u001b[49m\u001b[43m=\u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43moptions\u001b[49m\u001b[43m.\u001b[49m\u001b[43mget\u001b[49m\u001b[43m(\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mmemory_map\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;28;43;01mFalse\u001b[39;49;00m\u001b[43m)\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1910\u001b[39m \u001b[43m    \u001b[49m\u001b[43mis_text\u001b[49m\u001b[43m=\u001b[49m\u001b[43mis_text\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1911\u001b[39m \u001b[43m    \u001b[49m\u001b[43merrors\u001b[49m\u001b[43m=\u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43moptions\u001b[49m\u001b[43m.\u001b[49m\u001b[43mget\u001b[49m\u001b[43m(\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mencoding_errors\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mstrict\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m)\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1912\u001b[39m \u001b[43m    \u001b[49m\u001b[43mstorage_options\u001b[49m\u001b[43m=\u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43moptions\u001b[49m\u001b[43m.\u001b[49m\u001b[43mget\u001b[49m\u001b[43m(\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mstorage_options\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;28;43;01mNone\u001b[39;49;00m\u001b[43m)\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1913\u001b[39m \u001b[43m\u001b[49m\u001b[43m)\u001b[49m\n\u001b[32m   1914\u001b[39m \u001b[38;5;28;01massert\u001b[39;00m \u001b[38;5;28mself\u001b[39m.handles \u001b[38;5;129;01mis\u001b[39;00m \u001b[38;5;129;01mnot\u001b[39;00m \u001b[38;5;28;01mNone\u001b[39;00m\n\u001b[32m   1915\u001b[39m f = \u001b[38;5;28mself\u001b[39m.handles.handle\n",
+      "\u001b[36mFile \u001b[39m\u001b[32m~\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\pandas\\io\\common.py:930\u001b[39m, in \u001b[36mget_handle\u001b[39m\u001b[34m(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)\u001b[39m\n\u001b[32m    925\u001b[39m \u001b[38;5;28;01melif\u001b[39;00m \u001b[38;5;28misinstance\u001b[39m(handle, \u001b[38;5;28mstr\u001b[39m):\n\u001b[32m    926\u001b[39m     \u001b[38;5;66;03m# Check whether the filename is to be opened in binary mode.\u001b[39;00m\n\u001b[32m    927\u001b[39m     \u001b[38;5;66;03m# Binary mode does not support 'encoding' and 'newline'.\u001b[39;00m\n\u001b[32m    928\u001b[39m     \u001b[38;5;28;01mif\u001b[39;00m ioargs.encoding \u001b[38;5;129;01mand\u001b[39;00m \u001b[33m\"\u001b[39m\u001b[33mb\u001b[39m\u001b[33m\"\u001b[39m \u001b[38;5;129;01mnot\u001b[39;00m \u001b[38;5;129;01min\u001b[39;00m ioargs.mode:\n\u001b[32m    929\u001b[39m         \u001b[38;5;66;03m# Encoding\u001b[39;00m\n\u001b[32m--> \u001b[39m\u001b[32m930\u001b[39m         handle = \u001b[38;5;28;43mopen\u001b[39;49m\u001b[43m(\u001b[49m\n\u001b[32m    931\u001b[39m \u001b[43m            \u001b[49m\u001b[43mhandle\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m    932\u001b[39m \u001b[43m            \u001b[49m\u001b[43mioargs\u001b[49m\u001b[43m.\u001b[49m\u001b[43mmode\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m    933\u001b[39m \u001b[43m            \u001b[49m\u001b[43mencoding\u001b[49m\u001b[43m=\u001b[49m\u001b[43mioargs\u001b[49m\u001b[43m.\u001b[49m\u001b[43mencoding\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m    934\u001b[39m \u001b[43m            \u001b[49m\u001b[43merrors\u001b[49m\u001b[43m=\u001b[49m\u001b[43merrors\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m    935\u001b[39m \u001b[43m            \u001b[49m\u001b[43mnewline\u001b[49m\u001b[43m=\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\n\u001b[32m    936\u001b[39m \u001b[43m        \u001b[49m\u001b[43m)\u001b[49m\n\u001b[32m    937\u001b[39m     \u001b[38;5;28;01melse\u001b[39;00m:\n\u001b[32m    938\u001b[39m         \u001b[38;5;66;03m# Binary mode\u001b[39;00m\n\u001b[32m    939\u001b[39m         handle = \u001b[38;5;28mopen\u001b[39m(handle, ioargs.mode)\n",
+      "\u001b[31mFileNotFoundError\u001b[39m: [Errno 2] No such file or directory: 'retail_sales_analysis_dataset.csv'"
+     ]
+    }
+   ],
+   "source": [
+    "df = pd.read_csv(\"retail_sales_analysis_dataset.csv\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "05007994-e6e2-4fe8-a940-0066333f6b70",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df = pd.read_csv(\"retail_sales_analysis_dataset.csv\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "5ccb512d-7e06-4528-95ca-b4d06e3577bb",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(1512, 20)"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.shape\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "13a30834-611d-4a7e-b954-58804e0e2e92",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['Order_ID', 'Order_Date', 'Customer_ID', 'Customer_Name', 'Region',\n",
+       "       'City', 'Category', 'Product', 'Quantity', 'Unit_Price', 'Discount',\n",
+       "       'Payment_Mode', 'Customer_Type', 'Returned', 'Revenue',\n",
+       "       'Discount_Amount', 'Final_Sales', 'Cost', 'Profit', 'Profit_Margin'],\n",
+       "      dtype='str')"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.columns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "ddc012a5-8375-4a3f-943d-85e84070341b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<bound method DataFrame.info of       Order_ID  Order_Date Customer_ID  Customer_Name Region       City  \\\n",
+       "0     ORD10908  2025-01-13       C1217  Customer_1217   East      Patna   \n",
+       "1     ORD10618  2025-08-06       C1344  Customer_1344  South  Hyderabad   \n",
+       "2     ORD11387  2025-05-16       C1088  Customer_1088   West       Pune   \n",
+       "3     ORD10942  2025-10-04       C1159  Customer_1159   West       Pune   \n",
+       "4     ORD10304  2025-10-10       C1168  Customer_1168   West       Pune   \n",
+       "...        ...         ...         ...            ...    ...        ...   \n",
+       "1507  ORD11131  2025-10-27       C1289  Customer_1289  North      Delhi   \n",
+       "1508  ORD11295  2025-12-12       C1051  Customer_1051  South  Bengaluru   \n",
+       "1509  ORD10861  2025-08-31       C1135  Customer_1135  South    Chennai   \n",
+       "1510  ORD11460  2025-05-24       C1290  Customer_1290   East      Patna   \n",
+       "1511  ORD11127  2025-01-15       C1083  Customer_1083   West       Pune   \n",
+       "\n",
+       "             Category         Product  Quantity  Unit_Price  Discount  \\\n",
+       "0         Electronics  Wireless Mouse         5         750      0.10   \n",
+       "1         Electronics        Keyboard         4        1200      0.00   \n",
+       "2         Accessories    Laptop Stand         1        2400      0.15   \n",
+       "3         Electronics        Keyboard         2        1200      0.05   \n",
+       "4     Home Appliances   Mixer Grinder         1        3500      0.05   \n",
+       "...               ...             ...       ...         ...       ...   \n",
+       "1507        Furniture     Study Table         1        8500      0.05   \n",
+       "1508      Accessories      Phone Case         1         600      0.05   \n",
+       "1509      Electronics        Keyboard         3        1200      0.10   \n",
+       "1510      Electronics      Headphones         1        2800      0.10   \n",
+       "1511  Home Appliances  Vacuum Cleaner         4        7500      0.05   \n",
+       "\n",
+       "     Payment_Mode Customer_Type Returned  Revenue  Discount_Amount  \\\n",
+       "0             UPI     Returning       No     3750            375.0   \n",
+       "1     Credit Card           New       No     4800              0.0   \n",
+       "2     Credit Card           New       No     2400            360.0   \n",
+       "3             UPI           New       No     2400            120.0   \n",
+       "4             UPI     Returning       No     3500            175.0   \n",
+       "...           ...           ...      ...      ...              ...   \n",
+       "1507   Debit Card     Returning       No     8500            425.0   \n",
+       "1508  Credit Card           New       No      600             30.0   \n",
+       "1509         Cash     Returning       No     3600            360.0   \n",
+       "1510   Debit Card     Returning       No     2800            280.0   \n",
+       "1511  Credit Card           New       No    30000           1500.0   \n",
+       "\n",
+       "      Final_Sales     Cost  Profit  Profit_Margin  \n",
+       "0          3375.0   2295.0  1080.0           0.32  \n",
+       "1          4800.0   3264.0  1536.0           0.32  \n",
+       "2          2040.0   1122.0   918.0           0.45  \n",
+       "3          2280.0   1550.4   729.6           0.32  \n",
+       "4          3325.0   2394.0   931.0           0.28  \n",
+       "...           ...      ...     ...            ...  \n",
+       "1507       8075.0   5006.5  3068.5           0.38  \n",
+       "1508        570.0    313.5   256.5           0.45  \n",
+       "1509       3240.0   2203.2  1036.8           0.32  \n",
+       "1510       2520.0   1713.6   806.4           0.32  \n",
+       "1511      28500.0  20520.0  7980.0           0.28  \n",
+       "\n",
+       "[1512 rows x 20 columns]>"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.info"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "ec922e93-6474-4baa-9851-a60e843d35f6",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<bound method NDFrame.describe of       Order_ID  Order_Date Customer_ID  Customer_Name Region       City  \\\n",
+       "0     ORD10908  2025-01-13       C1217  Customer_1217   East      Patna   \n",
+       "1     ORD10618  2025-08-06       C1344  Customer_1344  South  Hyderabad   \n",
+       "2     ORD11387  2025-05-16       C1088  Customer_1088   West       Pune   \n",
+       "3     ORD10942  2025-10-04       C1159  Customer_1159   West       Pune   \n",
+       "4     ORD10304  2025-10-10       C1168  Customer_1168   West       Pune   \n",
+       "...        ...         ...         ...            ...    ...        ...   \n",
+       "1507  ORD11131  2025-10-27       C1289  Customer_1289  North      Delhi   \n",
+       "1508  ORD11295  2025-12-12       C1051  Customer_1051  South  Bengaluru   \n",
+       "1509  ORD10861  2025-08-31       C1135  Customer_1135  South    Chennai   \n",
+       "1510  ORD11460  2025-05-24       C1290  Customer_1290   East      Patna   \n",
+       "1511  ORD11127  2025-01-15       C1083  Customer_1083   West       Pune   \n",
+       "\n",
+       "             Category         Product  Quantity  Unit_Price  Discount  \\\n",
+       "0         Electronics  Wireless Mouse         5         750      0.10   \n",
+       "1         Electronics        Keyboard         4        1200      0.00   \n",
+       "2         Accessories    Laptop Stand         1        2400      0.15   \n",
+       "3         Electronics        Keyboard         2        1200      0.05   \n",
+       "4     Home Appliances   Mixer Grinder         1        3500      0.05   \n",
+       "...               ...             ...       ...         ...       ...   \n",
+       "1507        Furniture     Study Table         1        8500      0.05   \n",
+       "1508      Accessories      Phone Case         1         600      0.05   \n",
+       "1509      Electronics        Keyboard         3        1200      0.10   \n",
+       "1510      Electronics      Headphones         1        2800      0.10   \n",
+       "1511  Home Appliances  Vacuum Cleaner         4        7500      0.05   \n",
+       "\n",
+       "     Payment_Mode Customer_Type Returned  Revenue  Discount_Amount  \\\n",
+       "0             UPI     Returning       No     3750            375.0   \n",
+       "1     Credit Card           New       No     4800              0.0   \n",
+       "2     Credit Card           New       No     2400            360.0   \n",
+       "3             UPI           New       No     2400            120.0   \n",
+       "4             UPI     Returning       No     3500            175.0   \n",
+       "...           ...           ...      ...      ...              ...   \n",
+       "1507   Debit Card     Returning       No     8500            425.0   \n",
+       "1508  Credit Card           New       No      600             30.0   \n",
+       "1509         Cash     Returning       No     3600            360.0   \n",
+       "1510   Debit Card     Returning       No     2800            280.0   \n",
+       "1511  Credit Card           New       No    30000           1500.0   \n",
+       "\n",
+       "      Final_Sales     Cost  Profit  Profit_Margin  \n",
+       "0          3375.0   2295.0  1080.0           0.32  \n",
+       "1          4800.0   3264.0  1536.0           0.32  \n",
+       "2          2040.0   1122.0   918.0           0.45  \n",
+       "3          2280.0   1550.4   729.6           0.32  \n",
+       "4          3325.0   2394.0   931.0           0.28  \n",
+       "...           ...      ...     ...            ...  \n",
+       "1507       8075.0   5006.5  3068.5           0.38  \n",
+       "1508        570.0    313.5   256.5           0.45  \n",
+       "1509       3240.0   2203.2  1036.8           0.32  \n",
+       "1510       2520.0   1713.6   806.4           0.32  \n",
+       "1511      28500.0  20520.0  7980.0           0.28  \n",
+       "\n",
+       "[1512 rows x 20 columns]>"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.describe\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "1bf3cff9-cb6d-4fc2-9d6a-272d829a50e4",
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "KeyError",
+     "evalue": "'regions'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[31m---------------------------------------------------------------------------\u001b[39m",
+      "\u001b[31mKeyError\u001b[39m                                  Traceback (most recent call last)",
+      "\u001b[36mFile \u001b[39m\u001b[32m~\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\pandas\\core\\indexes\\base.py:3641\u001b[39m, in \u001b[36mIndex.get_loc\u001b[39m\u001b[34m(self, key)\u001b[39m\n\u001b[32m   3640\u001b[39m \u001b[38;5;28;01mtry\u001b[39;00m:\n\u001b[32m-> \u001b[39m\u001b[32m3641\u001b[39m     \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43m_engine\u001b[49m\u001b[43m.\u001b[49m\u001b[43mget_loc\u001b[49m\u001b[43m(\u001b[49m\u001b[43mcasted_key\u001b[49m\u001b[43m)\u001b[49m\n\u001b[32m   3642\u001b[39m \u001b[38;5;28;01mexcept\u001b[39;00m \u001b[38;5;167;01mKeyError\u001b[39;00m \u001b[38;5;28;01mas\u001b[39;00m err:\n",
+      "\u001b[36mFile \u001b[39m\u001b[32mpandas/_libs/index.pyx:168\u001b[39m, in \u001b[36mpandas._libs.index.IndexEngine.get_loc\u001b[39m\u001b[34m()\u001b[39m\n",
+      "\u001b[36mFile \u001b[39m\u001b[32mpandas/_libs/index.pyx:197\u001b[39m, in \u001b[36mpandas._libs.index.IndexEngine.get_loc\u001b[39m\u001b[34m()\u001b[39m\n",
+      "\u001b[36mFile \u001b[39m\u001b[32mpandas/_libs/hashtable_class_helper.pxi:7668\u001b[39m, in \u001b[36mpandas._libs.hashtable.PyObjectHashTable.get_item\u001b[39m\u001b[34m()\u001b[39m\n",
+      "\u001b[36mFile \u001b[39m\u001b[32mpandas/_libs/hashtable_class_helper.pxi:7676\u001b[39m, in \u001b[36mpandas._libs.hashtable.PyObjectHashTable.get_item\u001b[39m\u001b[34m()\u001b[39m\n",
+      "\u001b[31mKeyError\u001b[39m: 'regions'",
+      "\nThe above exception was the direct cause of the following exception:\n",
+      "\u001b[31mKeyError\u001b[39m                                  Traceback (most recent call last)",
+      "\u001b[36mCell\u001b[39m\u001b[36m \u001b[39m\u001b[32mIn[8]\u001b[39m\u001b[32m, line 1\u001b[39m\n\u001b[32m----> \u001b[39m\u001b[32m1\u001b[39m \u001b[43mdf\u001b[49m\u001b[43m[\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mregions\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m]\u001b[49m.value_counts\n",
+      "\u001b[36mFile \u001b[39m\u001b[32m~\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\pandas\\core\\frame.py:4378\u001b[39m, in \u001b[36mDataFrame.__getitem__\u001b[39m\u001b[34m(self, key)\u001b[39m\n\u001b[32m   4376\u001b[39m \u001b[38;5;28;01mif\u001b[39;00m \u001b[38;5;28mself\u001b[39m.columns.nlevels > \u001b[32m1\u001b[39m:\n\u001b[32m   4377\u001b[39m     \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[38;5;28mself\u001b[39m._getitem_multilevel(key)\n\u001b[32m-> \u001b[39m\u001b[32m4378\u001b[39m indexer = \u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43mcolumns\u001b[49m\u001b[43m.\u001b[49m\u001b[43mget_loc\u001b[49m\u001b[43m(\u001b[49m\u001b[43mkey\u001b[49m\u001b[43m)\u001b[49m\n\u001b[32m   4379\u001b[39m \u001b[38;5;28;01mif\u001b[39;00m is_integer(indexer):\n\u001b[32m   4380\u001b[39m     indexer = [indexer]\n",
+      "\u001b[36mFile \u001b[39m\u001b[32m~\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\pandas\\core\\indexes\\base.py:3648\u001b[39m, in \u001b[36mIndex.get_loc\u001b[39m\u001b[34m(self, key)\u001b[39m\n\u001b[32m   3643\u001b[39m     \u001b[38;5;28;01mif\u001b[39;00m \u001b[38;5;28misinstance\u001b[39m(casted_key, \u001b[38;5;28mslice\u001b[39m) \u001b[38;5;129;01mor\u001b[39;00m (\n\u001b[32m   3644\u001b[39m         \u001b[38;5;28misinstance\u001b[39m(casted_key, abc.Iterable)\n\u001b[32m   3645\u001b[39m         \u001b[38;5;129;01mand\u001b[39;00m \u001b[38;5;28many\u001b[39m(\u001b[38;5;28misinstance\u001b[39m(x, \u001b[38;5;28mslice\u001b[39m) \u001b[38;5;28;01mfor\u001b[39;00m x \u001b[38;5;129;01min\u001b[39;00m casted_key)\n\u001b[32m   3646\u001b[39m     ):\n\u001b[32m   3647\u001b[39m         \u001b[38;5;28;01mraise\u001b[39;00m InvalidIndexError(key) \u001b[38;5;28;01mfrom\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[34;01merr\u001b[39;00m\n\u001b[32m-> \u001b[39m\u001b[32m3648\u001b[39m     \u001b[38;5;28;01mraise\u001b[39;00m \u001b[38;5;167;01mKeyError\u001b[39;00m(key) \u001b[38;5;28;01mfrom\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[34;01merr\u001b[39;00m\n\u001b[32m   3649\u001b[39m \u001b[38;5;28;01mexcept\u001b[39;00m \u001b[38;5;167;01mTypeError\u001b[39;00m:\n\u001b[32m   3650\u001b[39m     \u001b[38;5;66;03m# If we have a listlike key, _check_indexing_error will raise\u001b[39;00m\n\u001b[32m   3651\u001b[39m     \u001b[38;5;66;03m#  InvalidIndexError. Otherwise we fall through and re-raise\u001b[39;00m\n\u001b[32m   3652\u001b[39m     \u001b[38;5;66;03m#  the TypeError.\u001b[39;00m\n\u001b[32m   3653\u001b[39m     \u001b[38;5;28mself\u001b[39m._check_indexing_error(key)\n",
+      "\u001b[31mKeyError\u001b[39m: 'regions'"
+     ]
+    }
+   ],
+   "source": [
+    "df[\"regions\"].value_counts"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "4eb2cf70-18a0-4c0f-a833-c818e9045855",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Region\n",
+       "South    593\n",
+       "West     359\n",
+       "North    322\n",
+       "East     238\n",
+       "Name: count, dtype: int64"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Region\"].value_counts()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "2f64e83a-8c17-4095-87fd-3380675e8b09",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Category\n",
+       "Electronics        508\n",
+       "Home Appliances    375\n",
+       "Accessories        328\n",
+       "Furniture          301\n",
+       "Name: count, dtype: int64"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Category\"].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "e8a9fce7-ca3c-40ec-a6d8-76cbbe9f62ef",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Payment_Mode\n",
+       "UPI            590\n",
+       "Credit Card    373\n",
+       "Debit Card     304\n",
+       "Net Banking    125\n",
+       "Cash           115\n",
+       "Name: count, dtype: int64"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Payment_Mode\"].value_counts()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "6498d8c6-f47a-4cb8-8813-fca531b591be",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Customer_Type\n",
+       "Returning    971\n",
+       "New          536\n",
+       "Name: count, dtype: int64"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Customer_Type\"].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "05da85bf-7719-475c-a81a-40ec8b6cb645",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Order_ID           0\n",
+       "Order_Date         0\n",
+       "Customer_ID        0\n",
+       "Customer_Name      0\n",
+       "Region             0\n",
+       "City               8\n",
+       "Category           0\n",
+       "Product            0\n",
+       "Quantity           0\n",
+       "Unit_Price         0\n",
+       "Discount           7\n",
+       "Payment_Mode       5\n",
+       "Customer_Type      5\n",
+       "Returned           0\n",
+       "Revenue            0\n",
+       "Discount_Amount    7\n",
+       "Final_Sales        7\n",
+       "Cost               7\n",
+       "Profit             7\n",
+       "Profit_Margin      7\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "c5ebd07c-79df-486a-884c-ea7ad39915f7",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.int64(12)"
+      ]
+     },
+     "execution_count": 14,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.duplicated().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "915e9ca6-3998-46a3-9e56-5dadef26c1e0",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Order_ID           0.000000\n",
+       "Order_Date         0.000000\n",
+       "Customer_ID        0.000000\n",
+       "Customer_Name      0.000000\n",
+       "Region             0.000000\n",
+       "City               0.529101\n",
+       "Category           0.000000\n",
+       "Product            0.000000\n",
+       "Quantity           0.000000\n",
+       "Unit_Price         0.000000\n",
+       "Discount           0.462963\n",
+       "Payment_Mode       0.330688\n",
+       "Customer_Type      0.330688\n",
+       "Returned           0.000000\n",
+       "Revenue            0.000000\n",
+       "Discount_Amount    0.462963\n",
+       "Final_Sales        0.462963\n",
+       "Cost               0.462963\n",
+       "Profit             0.462963\n",
+       "Profit_Margin      0.462963\n",
+       "dtype: float64"
+      ]
+     },
+     "execution_count": 15,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "missing_percentage = (df.isnull().sum() / len(df)) * 100\n",
+    "\n",
+    "missing_percentage"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "c565b659-f647-48b4-801a-b0e0ea625a30",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Order_ID</th>\n",
+       "      <th>Order_Date</th>\n",
+       "      <th>Customer_ID</th>\n",
+       "      <th>Customer_Name</th>\n",
+       "      <th>Region</th>\n",
+       "      <th>City</th>\n",
+       "      <th>Category</th>\n",
+       "      <th>Product</th>\n",
+       "      <th>Quantity</th>\n",
+       "      <th>Unit_Price</th>\n",
+       "      <th>Discount</th>\n",
+       "      <th>Payment_Mode</th>\n",
+       "      <th>Customer_Type</th>\n",
+       "      <th>Returned</th>\n",
+       "      <th>Revenue</th>\n",
+       "      <th>Discount_Amount</th>\n",
+       "      <th>Final_Sales</th>\n",
+       "      <th>Cost</th>\n",
+       "      <th>Profit</th>\n",
+       "      <th>Profit_Margin</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>327</th>\n",
+       "      <td>ORD10812</td>\n",
+       "      <td>2025-12-28</td>\n",
+       "      <td>C1049</td>\n",
+       "      <td>Customer_1049</td>\n",
+       "      <td>South</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>Electronics</td>\n",
+       "      <td>Smart Watch</td>\n",
+       "      <td>4</td>\n",
+       "      <td>6500</td>\n",
+       "      <td>0.10</td>\n",
+       "      <td>Debit Card</td>\n",
+       "      <td>New</td>\n",
+       "      <td>No</td>\n",
+       "      <td>26000</td>\n",
+       "      <td>2600.0</td>\n",
+       "      <td>23400.0</td>\n",
+       "      <td>15912.0</td>\n",
+       "      <td>7488.0</td>\n",
+       "      <td>0.32</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>427</th>\n",
+       "      <td>ORD11472</td>\n",
+       "      <td>2025-12-29</td>\n",
+       "      <td>C1133</td>\n",
+       "      <td>Customer_1133</td>\n",
+       "      <td>East</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>Accessories</td>\n",
+       "      <td>Power Bank</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1600</td>\n",
+       "      <td>0.15</td>\n",
+       "      <td>UPI</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>Yes</td>\n",
+       "      <td>1600</td>\n",
+       "      <td>240.0</td>\n",
+       "      <td>1360.0</td>\n",
+       "      <td>748.0</td>\n",
+       "      <td>612.0</td>\n",
+       "      <td>0.45</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>459</th>\n",
+       "      <td>ORD10200</td>\n",
+       "      <td>2025-09-08</td>\n",
+       "      <td>C1146</td>\n",
+       "      <td>Customer_1146</td>\n",
+       "      <td>South</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>Furniture</td>\n",
+       "      <td>Office Chair</td>\n",
+       "      <td>1</td>\n",
+       "      <td>6500</td>\n",
+       "      <td>0.00</td>\n",
+       "      <td>Net Banking</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>6500</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>6500.0</td>\n",
+       "      <td>4030.0</td>\n",
+       "      <td>2470.0</td>\n",
+       "      <td>0.38</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>537</th>\n",
+       "      <td>ORD10989</td>\n",
+       "      <td>2025-05-08</td>\n",
+       "      <td>C1018</td>\n",
+       "      <td>Customer_1018</td>\n",
+       "      <td>East</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>Accessories</td>\n",
+       "      <td>Power Bank</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1600</td>\n",
+       "      <td>0.10</td>\n",
+       "      <td>Credit Card</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>1600</td>\n",
+       "      <td>160.0</td>\n",
+       "      <td>1440.0</td>\n",
+       "      <td>792.0</td>\n",
+       "      <td>648.0</td>\n",
+       "      <td>0.45</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1215</th>\n",
+       "      <td>ORD10960</td>\n",
+       "      <td>2025-02-28</td>\n",
+       "      <td>C1269</td>\n",
+       "      <td>Customer_1269</td>\n",
+       "      <td>West</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>Furniture</td>\n",
+       "      <td>Office Chair</td>\n",
+       "      <td>4</td>\n",
+       "      <td>6500</td>\n",
+       "      <td>0.10</td>\n",
+       "      <td>Debit Card</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>26000</td>\n",
+       "      <td>2600.0</td>\n",
+       "      <td>23400.0</td>\n",
+       "      <td>14508.0</td>\n",
+       "      <td>8892.0</td>\n",
+       "      <td>0.38</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1230</th>\n",
+       "      <td>ORD10688</td>\n",
+       "      <td>2025-06-11</td>\n",
+       "      <td>C1281</td>\n",
+       "      <td>Customer_1281</td>\n",
+       "      <td>West</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>Furniture</td>\n",
+       "      <td>Side Table</td>\n",
+       "      <td>1</td>\n",
+       "      <td>2800</td>\n",
+       "      <td>0.00</td>\n",
+       "      <td>Credit Card</td>\n",
+       "      <td>New</td>\n",
+       "      <td>No</td>\n",
+       "      <td>2800</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>2800.0</td>\n",
+       "      <td>1736.0</td>\n",
+       "      <td>1064.0</td>\n",
+       "      <td>0.38</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1368</th>\n",
+       "      <td>ORD10864</td>\n",
+       "      <td>2025-01-09</td>\n",
+       "      <td>C1303</td>\n",
+       "      <td>Customer_1303</td>\n",
+       "      <td>South</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>Furniture</td>\n",
+       "      <td>Sofa</td>\n",
+       "      <td>1</td>\n",
+       "      <td>22000</td>\n",
+       "      <td>0.05</td>\n",
+       "      <td>Net Banking</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>22000</td>\n",
+       "      <td>1100.0</td>\n",
+       "      <td>20900.0</td>\n",
+       "      <td>12958.0</td>\n",
+       "      <td>7942.0</td>\n",
+       "      <td>0.38</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1452</th>\n",
+       "      <td>ORD10898</td>\n",
+       "      <td>2025-01-24</td>\n",
+       "      <td>C1007</td>\n",
+       "      <td>Customer_1007</td>\n",
+       "      <td>North</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>Electronics</td>\n",
+       "      <td>Headphones</td>\n",
+       "      <td>2</td>\n",
+       "      <td>2800</td>\n",
+       "      <td>0.00</td>\n",
+       "      <td>UPI</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>5600</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>5600.0</td>\n",
+       "      <td>3808.0</td>\n",
+       "      <td>1792.0</td>\n",
+       "      <td>0.32</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      Order_ID  Order_Date Customer_ID  Customer_Name Region City  \\\n",
+       "327   ORD10812  2025-12-28       C1049  Customer_1049  South  NaN   \n",
+       "427   ORD11472  2025-12-29       C1133  Customer_1133   East  NaN   \n",
+       "459   ORD10200  2025-09-08       C1146  Customer_1146  South  NaN   \n",
+       "537   ORD10989  2025-05-08       C1018  Customer_1018   East  NaN   \n",
+       "1215  ORD10960  2025-02-28       C1269  Customer_1269   West  NaN   \n",
+       "1230  ORD10688  2025-06-11       C1281  Customer_1281   West  NaN   \n",
+       "1368  ORD10864  2025-01-09       C1303  Customer_1303  South  NaN   \n",
+       "1452  ORD10898  2025-01-24       C1007  Customer_1007  North  NaN   \n",
+       "\n",
+       "         Category       Product  Quantity  Unit_Price  Discount Payment_Mode  \\\n",
+       "327   Electronics   Smart Watch         4        6500      0.10   Debit Card   \n",
+       "427   Accessories    Power Bank         1        1600      0.15          UPI   \n",
+       "459     Furniture  Office Chair         1        6500      0.00  Net Banking   \n",
+       "537   Accessories    Power Bank         1        1600      0.10  Credit Card   \n",
+       "1215    Furniture  Office Chair         4        6500      0.10   Debit Card   \n",
+       "1230    Furniture    Side Table         1        2800      0.00  Credit Card   \n",
+       "1368    Furniture          Sofa         1       22000      0.05  Net Banking   \n",
+       "1452  Electronics    Headphones         2        2800      0.00          UPI   \n",
+       "\n",
+       "     Customer_Type Returned  Revenue  Discount_Amount  Final_Sales     Cost  \\\n",
+       "327            New       No    26000           2600.0      23400.0  15912.0   \n",
+       "427      Returning      Yes     1600            240.0       1360.0    748.0   \n",
+       "459      Returning       No     6500              0.0       6500.0   4030.0   \n",
+       "537      Returning       No     1600            160.0       1440.0    792.0   \n",
+       "1215     Returning       No    26000           2600.0      23400.0  14508.0   \n",
+       "1230           New       No     2800              0.0       2800.0   1736.0   \n",
+       "1368     Returning       No    22000           1100.0      20900.0  12958.0   \n",
+       "1452     Returning       No     5600              0.0       5600.0   3808.0   \n",
+       "\n",
+       "      Profit  Profit_Margin  \n",
+       "327   7488.0           0.32  \n",
+       "427    612.0           0.45  \n",
+       "459   2470.0           0.38  \n",
+       "537    648.0           0.45  \n",
+       "1215  8892.0           0.38  \n",
+       "1230  1064.0           0.38  \n",
+       "1368  7942.0           0.38  \n",
+       "1452  1792.0           0.32  "
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[df[\"City\"].isnull()]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "a591652a-eba2-4608-9db1-e5a85e9cfed2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"City\"] = df[\"City\"].fillna(\"Unknown\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "739fc33a-ad1f-4527-9c6e-ac14f779fa1c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.int64(0)"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"City\"].isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "9cc10ae5-bff6-42d0-a340-7534165b7974",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"Payment_Mode\"] = df[\"Payment_Mode\"].fillna(\"Unknown\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "6968b212-f3c1-4719-8cb6-d97b3d5c2672",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.int64(0)"
+      ]
+     },
+     "execution_count": 20,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Payment_Mode\"].isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "59c464a9-45c3-41ee-b998-97bab5be6272",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"Customer_Type\"] = df[\"Customer_Type\"].fillna(\"Unknown\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "df955247-5bb4-42e1-a099-447d30ae8b8d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.int64(7)"
+      ]
+     },
+     "execution_count": 22,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Discount\"].isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "e211eeda-548d-48db-8303-01eb52f0486d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"Discount\"] = df[\"Discount\"].fillna(0)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "ee932163-02fa-4a88-8d3a-4f1f2c93017f",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.int64(0)"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Discount\"].isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "b5e5bd79-83a5-4994-bcbf-414e36e3086a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"Discount_Amount\"] = df[\"Revenue\"] * df[\"Discount\"]\n",
+    "\n",
+    "df[\"Final_Sales\"] = (\n",
+    "    df[\"Revenue\"] - df[\"Discount_Amount\"]\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "5555c833-6251-45e2-9e48-3fe56bb61635",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"Cost\"] = (\n",
+    "    df[\"Final_Sales\"] *\n",
+    "    df[\"Category\"].map({\n",
+    "        \"Electronics\": 0.68,\n",
+    "        \"Home Appliances\": 0.72,\n",
+    "        \"Furniture\": 0.62,\n",
+    "        \"Accessories\": 0.55\n",
+    "    })\n",
+    ")\n",
+    "\n",
+    "df[\"Profit\"] = df[\"Final_Sales\"] - df[\"Cost\"]\n",
+    "\n",
+    "df[\"Profit_Margin\"] = (\n",
+    "    df[\"Profit\"] / df[\"Final_Sales\"]\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "id": "0938b009-ff8c-42ab-a47d-91eeed3469c5",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Order_ID           0\n",
+       "Order_Date         0\n",
+       "Customer_ID        0\n",
+       "Customer_Name      0\n",
+       "Region             0\n",
+       "City               0\n",
+       "Category           0\n",
+       "Product            0\n",
+       "Quantity           0\n",
+       "Unit_Price         0\n",
+       "Discount           0\n",
+       "Payment_Mode       0\n",
+       "Customer_Type      0\n",
+       "Returned           0\n",
+       "Revenue            0\n",
+       "Discount_Amount    0\n",
+       "Final_Sales        0\n",
+       "Cost               0\n",
+       "Profit             0\n",
+       "Profit_Margin      0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 27,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "id": "787c554a-209c-458a-a31f-f12bab9b19f4",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.int64(12)"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.duplicated().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "id": "551b5ed3-b1c4-4e36-9e9e-6da1e19eb806",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Order_ID</th>\n",
+       "      <th>Order_Date</th>\n",
+       "      <th>Customer_ID</th>\n",
+       "      <th>Customer_Name</th>\n",
+       "      <th>Region</th>\n",
+       "      <th>City</th>\n",
+       "      <th>Category</th>\n",
+       "      <th>Product</th>\n",
+       "      <th>Quantity</th>\n",
+       "      <th>Unit_Price</th>\n",
+       "      <th>Discount</th>\n",
+       "      <th>Payment_Mode</th>\n",
+       "      <th>Customer_Type</th>\n",
+       "      <th>Returned</th>\n",
+       "      <th>Revenue</th>\n",
+       "      <th>Discount_Amount</th>\n",
+       "      <th>Final_Sales</th>\n",
+       "      <th>Cost</th>\n",
+       "      <th>Profit</th>\n",
+       "      <th>Profit_Margin</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>119</th>\n",
+       "      <td>ORD10414</td>\n",
+       "      <td>2025-05-24</td>\n",
+       "      <td>C1283</td>\n",
+       "      <td>Customer_1283</td>\n",
+       "      <td>East</td>\n",
+       "      <td>Bhubaneswar</td>\n",
+       "      <td>Home Appliances</td>\n",
+       "      <td>Electric Kettle</td>\n",
+       "      <td>2</td>\n",
+       "      <td>1800</td>\n",
+       "      <td>0.10</td>\n",
+       "      <td>Credit Card</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>3600</td>\n",
+       "      <td>360.0</td>\n",
+       "      <td>3240.0</td>\n",
+       "      <td>2332.8</td>\n",
+       "      <td>907.2</td>\n",
+       "      <td>0.28</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>231</th>\n",
+       "      <td>ORD10057</td>\n",
+       "      <td>2025-08-10</td>\n",
+       "      <td>C1306</td>\n",
+       "      <td>Customer_1306</td>\n",
+       "      <td>West</td>\n",
+       "      <td>Ahmedabad</td>\n",
+       "      <td>Accessories</td>\n",
+       "      <td>Phone Case</td>\n",
+       "      <td>3</td>\n",
+       "      <td>600</td>\n",
+       "      <td>0.05</td>\n",
+       "      <td>Credit Card</td>\n",
+       "      <td>New</td>\n",
+       "      <td>No</td>\n",
+       "      <td>1800</td>\n",
+       "      <td>90.0</td>\n",
+       "      <td>1710.0</td>\n",
+       "      <td>940.5</td>\n",
+       "      <td>769.5</td>\n",
+       "      <td>0.45</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>822</th>\n",
+       "      <td>ORD11246</td>\n",
+       "      <td>2025-12-15</td>\n",
+       "      <td>C1115</td>\n",
+       "      <td>Customer_1115</td>\n",
+       "      <td>East</td>\n",
+       "      <td>Patna</td>\n",
+       "      <td>Home Appliances</td>\n",
+       "      <td>Vacuum Cleaner</td>\n",
+       "      <td>1</td>\n",
+       "      <td>7500</td>\n",
+       "      <td>0.00</td>\n",
+       "      <td>Net Banking</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>7500</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>7500.0</td>\n",
+       "      <td>5400.0</td>\n",
+       "      <td>2100.0</td>\n",
+       "      <td>0.28</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>942</th>\n",
+       "      <td>ORD11032</td>\n",
+       "      <td>2025-07-03</td>\n",
+       "      <td>C1028</td>\n",
+       "      <td>Customer_1028</td>\n",
+       "      <td>North</td>\n",
+       "      <td>Delhi</td>\n",
+       "      <td>Home Appliances</td>\n",
+       "      <td>Mixer Grinder</td>\n",
+       "      <td>1</td>\n",
+       "      <td>3500</td>\n",
+       "      <td>0.00</td>\n",
+       "      <td>Credit Card</td>\n",
+       "      <td>New</td>\n",
+       "      <td>No</td>\n",
+       "      <td>3500</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>3500.0</td>\n",
+       "      <td>2520.0</td>\n",
+       "      <td>980.0</td>\n",
+       "      <td>0.28</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>998</th>\n",
+       "      <td>ORD10891</td>\n",
+       "      <td>2025-09-06</td>\n",
+       "      <td>C1308</td>\n",
+       "      <td>Customer_1308</td>\n",
+       "      <td>South</td>\n",
+       "      <td>Chennai</td>\n",
+       "      <td>Home Appliances</td>\n",
+       "      <td>Mixer Grinder</td>\n",
+       "      <td>3</td>\n",
+       "      <td>3500</td>\n",
+       "      <td>0.05</td>\n",
+       "      <td>Debit Card</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>10500</td>\n",
+       "      <td>525.0</td>\n",
+       "      <td>9975.0</td>\n",
+       "      <td>7182.0</td>\n",
+       "      <td>2793.0</td>\n",
+       "      <td>0.28</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1001</th>\n",
+       "      <td>ORD10268</td>\n",
+       "      <td>2025-06-24</td>\n",
+       "      <td>C1316</td>\n",
+       "      <td>Customer_1316</td>\n",
+       "      <td>North</td>\n",
+       "      <td>Lucknow</td>\n",
+       "      <td>Electronics</td>\n",
+       "      <td>Keyboard</td>\n",
+       "      <td>2</td>\n",
+       "      <td>1200</td>\n",
+       "      <td>0.10</td>\n",
+       "      <td>UPI</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>2400</td>\n",
+       "      <td>240.0</td>\n",
+       "      <td>2160.0</td>\n",
+       "      <td>1468.8</td>\n",
+       "      <td>691.2</td>\n",
+       "      <td>0.32</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1036</th>\n",
+       "      <td>ORD11250</td>\n",
+       "      <td>2025-09-05</td>\n",
+       "      <td>C1095</td>\n",
+       "      <td>Customer_1095</td>\n",
+       "      <td>South</td>\n",
+       "      <td>Vijayawada</td>\n",
+       "      <td>Accessories</td>\n",
+       "      <td>Laptop Stand</td>\n",
+       "      <td>2</td>\n",
+       "      <td>2400</td>\n",
+       "      <td>0.00</td>\n",
+       "      <td>Debit Card</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>4800</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>4800.0</td>\n",
+       "      <td>2640.0</td>\n",
+       "      <td>2160.0</td>\n",
+       "      <td>0.45</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1103</th>\n",
+       "      <td>ORD11240</td>\n",
+       "      <td>2025-02-24</td>\n",
+       "      <td>C1059</td>\n",
+       "      <td>Customer_1059</td>\n",
+       "      <td>South</td>\n",
+       "      <td>Chennai</td>\n",
+       "      <td>Furniture</td>\n",
+       "      <td>Office Chair</td>\n",
+       "      <td>2</td>\n",
+       "      <td>6500</td>\n",
+       "      <td>0.00</td>\n",
+       "      <td>Debit Card</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>13000</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>13000.0</td>\n",
+       "      <td>8060.0</td>\n",
+       "      <td>4940.0</td>\n",
+       "      <td>0.38</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1112</th>\n",
+       "      <td>ORD10634</td>\n",
+       "      <td>2025-12-30</td>\n",
+       "      <td>C1242</td>\n",
+       "      <td>Customer_1242</td>\n",
+       "      <td>North</td>\n",
+       "      <td>Delhi</td>\n",
+       "      <td>Home Appliances</td>\n",
+       "      <td>Vacuum Cleaner</td>\n",
+       "      <td>4</td>\n",
+       "      <td>7500</td>\n",
+       "      <td>0.00</td>\n",
+       "      <td>Credit Card</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>30000</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>30000.0</td>\n",
+       "      <td>21600.0</td>\n",
+       "      <td>8400.0</td>\n",
+       "      <td>0.28</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1134</th>\n",
+       "      <td>ORD10775</td>\n",
+       "      <td>2025-02-07</td>\n",
+       "      <td>C1231</td>\n",
+       "      <td>Customer_1231</td>\n",
+       "      <td>East</td>\n",
+       "      <td>Kolkata</td>\n",
+       "      <td>Home Appliances</td>\n",
+       "      <td>Mixer Grinder</td>\n",
+       "      <td>1</td>\n",
+       "      <td>3500</td>\n",
+       "      <td>0.10</td>\n",
+       "      <td>UPI</td>\n",
+       "      <td>New</td>\n",
+       "      <td>No</td>\n",
+       "      <td>3500</td>\n",
+       "      <td>350.0</td>\n",
+       "      <td>3150.0</td>\n",
+       "      <td>2268.0</td>\n",
+       "      <td>882.0</td>\n",
+       "      <td>0.28</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1342</th>\n",
+       "      <td>ORD11307</td>\n",
+       "      <td>2025-06-05</td>\n",
+       "      <td>C1095</td>\n",
+       "      <td>Customer_1095</td>\n",
+       "      <td>East</td>\n",
+       "      <td>Patna</td>\n",
+       "      <td>Electronics</td>\n",
+       "      <td>Smart Watch</td>\n",
+       "      <td>1</td>\n",
+       "      <td>6500</td>\n",
+       "      <td>0.05</td>\n",
+       "      <td>Debit Card</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>6500</td>\n",
+       "      <td>325.0</td>\n",
+       "      <td>6175.0</td>\n",
+       "      <td>4199.0</td>\n",
+       "      <td>1976.0</td>\n",
+       "      <td>0.32</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1499</th>\n",
+       "      <td>ORD10088</td>\n",
+       "      <td>2025-10-13</td>\n",
+       "      <td>C1318</td>\n",
+       "      <td>Customer_1318</td>\n",
+       "      <td>West</td>\n",
+       "      <td>Ahmedabad</td>\n",
+       "      <td>Home Appliances</td>\n",
+       "      <td>Air Fryer</td>\n",
+       "      <td>1</td>\n",
+       "      <td>5200</td>\n",
+       "      <td>0.00</td>\n",
+       "      <td>UPI</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>5200</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>5200.0</td>\n",
+       "      <td>3744.0</td>\n",
+       "      <td>1456.0</td>\n",
+       "      <td>0.28</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      Order_ID  Order_Date Customer_ID  Customer_Name Region         City  \\\n",
+       "119   ORD10414  2025-05-24       C1283  Customer_1283   East  Bhubaneswar   \n",
+       "231   ORD10057  2025-08-10       C1306  Customer_1306   West    Ahmedabad   \n",
+       "822   ORD11246  2025-12-15       C1115  Customer_1115   East        Patna   \n",
+       "942   ORD11032  2025-07-03       C1028  Customer_1028  North        Delhi   \n",
+       "998   ORD10891  2025-09-06       C1308  Customer_1308  South      Chennai   \n",
+       "1001  ORD10268  2025-06-24       C1316  Customer_1316  North      Lucknow   \n",
+       "1036  ORD11250  2025-09-05       C1095  Customer_1095  South   Vijayawada   \n",
+       "1103  ORD11240  2025-02-24       C1059  Customer_1059  South      Chennai   \n",
+       "1112  ORD10634  2025-12-30       C1242  Customer_1242  North        Delhi   \n",
+       "1134  ORD10775  2025-02-07       C1231  Customer_1231   East      Kolkata   \n",
+       "1342  ORD11307  2025-06-05       C1095  Customer_1095   East        Patna   \n",
+       "1499  ORD10088  2025-10-13       C1318  Customer_1318   West    Ahmedabad   \n",
+       "\n",
+       "             Category          Product  Quantity  Unit_Price  Discount  \\\n",
+       "119   Home Appliances  Electric Kettle         2        1800      0.10   \n",
+       "231       Accessories       Phone Case         3         600      0.05   \n",
+       "822   Home Appliances   Vacuum Cleaner         1        7500      0.00   \n",
+       "942   Home Appliances    Mixer Grinder         1        3500      0.00   \n",
+       "998   Home Appliances    Mixer Grinder         3        3500      0.05   \n",
+       "1001      Electronics         Keyboard         2        1200      0.10   \n",
+       "1036      Accessories     Laptop Stand         2        2400      0.00   \n",
+       "1103        Furniture     Office Chair         2        6500      0.00   \n",
+       "1112  Home Appliances   Vacuum Cleaner         4        7500      0.00   \n",
+       "1134  Home Appliances    Mixer Grinder         1        3500      0.10   \n",
+       "1342      Electronics      Smart Watch         1        6500      0.05   \n",
+       "1499  Home Appliances        Air Fryer         1        5200      0.00   \n",
+       "\n",
+       "     Payment_Mode Customer_Type Returned  Revenue  Discount_Amount  \\\n",
+       "119   Credit Card     Returning       No     3600            360.0   \n",
+       "231   Credit Card           New       No     1800             90.0   \n",
+       "822   Net Banking     Returning       No     7500              0.0   \n",
+       "942   Credit Card           New       No     3500              0.0   \n",
+       "998    Debit Card     Returning       No    10500            525.0   \n",
+       "1001          UPI     Returning       No     2400            240.0   \n",
+       "1036   Debit Card     Returning       No     4800              0.0   \n",
+       "1103   Debit Card     Returning       No    13000              0.0   \n",
+       "1112  Credit Card     Returning       No    30000              0.0   \n",
+       "1134          UPI           New       No     3500            350.0   \n",
+       "1342   Debit Card     Returning       No     6500            325.0   \n",
+       "1499          UPI     Returning       No     5200              0.0   \n",
+       "\n",
+       "      Final_Sales     Cost  Profit  Profit_Margin  \n",
+       "119        3240.0   2332.8   907.2           0.28  \n",
+       "231        1710.0    940.5   769.5           0.45  \n",
+       "822        7500.0   5400.0  2100.0           0.28  \n",
+       "942        3500.0   2520.0   980.0           0.28  \n",
+       "998        9975.0   7182.0  2793.0           0.28  \n",
+       "1001       2160.0   1468.8   691.2           0.32  \n",
+       "1036       4800.0   2640.0  2160.0           0.45  \n",
+       "1103      13000.0   8060.0  4940.0           0.38  \n",
+       "1112      30000.0  21600.0  8400.0           0.28  \n",
+       "1134       3150.0   2268.0   882.0           0.28  \n",
+       "1342       6175.0   4199.0  1976.0           0.32  \n",
+       "1499       5200.0   3744.0  1456.0           0.28  "
+      ]
+     },
+     "execution_count": 29,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[df.duplicated()]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "id": "4e38222c-3895-4baa-80cd-04baaa10fd00",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df = df.drop_duplicates()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "id": "fb3a1e33-a734-4c0b-9d91-0eaa7dcc79e5",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.int64(0)"
+      ]
+     },
+     "execution_count": 31,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.duplicated().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "id": "9b47d851-3846-4046-b4bd-c6c23e8059ba",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(1500, 20)"
+      ]
+     },
+     "execution_count": 32,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "id": "758efd97-e673-47f7-b6bd-fbf208c2032d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "count    1500.000000\n",
+       "mean        1.936667\n",
+       "std         1.470861\n",
+       "min         1.000000\n",
+       "25%         1.000000\n",
+       "50%         2.000000\n",
+       "75%         2.000000\n",
+       "max        30.000000\n",
+       "Name: Quantity, dtype: float64"
+      ]
+     },
+     "execution_count": 33,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Quantity\"].describe()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "id": "f07ff7b0-d222-483b-b2f6-f54b24a135c6",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<StringDtype(storage='python', na_value=nan)>"
+      ]
+     },
+     "execution_count": 34,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Order_Date\"].dtype"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "id": "f7fbfdf5-4b20-4b0f-8eaf-4a506807e758",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"Order_Date\"] = pd.to_datetime(df[\"Order_Date\"])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "id": "c191848d-6a47-4f81-ba38-3491c116ccbe",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "dtype('<M8[us]')"
+      ]
+     },
+     "execution_count": 36,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Order_Date\"].dtype"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "id": "dc5cfe39-f5a1-497b-be02-fef566b97f04",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0       13\n",
+       "1        6\n",
+       "2       16\n",
+       "3        4\n",
+       "4       10\n",
+       "        ..\n",
+       "1507    27\n",
+       "1508    12\n",
+       "1509    31\n",
+       "1510    24\n",
+       "1511    15\n",
+       "Name: Order_Date, Length: 1500, dtype: int32"
+      ]
+     },
+     "execution_count": 37,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Order_Date\"].dt.year\n",
+    "df[\"Order_Date\"].dt.month\n",
+    "df[\"Order_Date\"].dt.day"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "id": "5b99cd99-8ad1-4e5d-81cf-a84a99dbb45a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(1500, 20)"
+      ]
+     },
+     "execution_count": 38,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "id": "91424aae-602d-4f3f-8dfa-312bfd9c0903",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Order_ID           0\n",
+       "Order_Date         0\n",
+       "Customer_ID        0\n",
+       "Customer_Name      0\n",
+       "Region             0\n",
+       "City               0\n",
+       "Category           0\n",
+       "Product            0\n",
+       "Quantity           0\n",
+       "Unit_Price         0\n",
+       "Discount           0\n",
+       "Payment_Mode       0\n",
+       "Customer_Type      0\n",
+       "Returned           0\n",
+       "Revenue            0\n",
+       "Discount_Amount    0\n",
+       "Final_Sales        0\n",
+       "Cost               0\n",
+       "Profit             0\n",
+       "Profit_Margin      0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 39,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "id": "fce7dccc-a18e-4ca6-948e-c3226af996d8",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.int64(0)"
+      ]
+     },
+     "execution_count": 40,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.duplicated().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "id": "6da266f7-52f7-43f6-bd27-60a52465a496",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Order_ID                      str\n",
+       "Order_Date         datetime64[us]\n",
+       "Customer_ID                   str\n",
+       "Customer_Name                 str\n",
+       "Region                        str\n",
+       "City                          str\n",
+       "Category                      str\n",
+       "Product                       str\n",
+       "Quantity                    int64\n",
+       "Unit_Price                  int64\n",
+       "Discount                  float64\n",
+       "Payment_Mode                  str\n",
+       "Customer_Type                 str\n",
+       "Returned                      str\n",
+       "Revenue                     int64\n",
+       "Discount_Amount           float64\n",
+       "Final_Sales               float64\n",
+       "Cost                      float64\n",
+       "Profit                    float64\n",
+       "Profit_Margin             float64\n",
+       "dtype: object"
+      ]
+     },
+     "execution_count": 41,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.dtypes"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "id": "39f6d2c8-d87f-4d8e-be11-41d7641afcec",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Order_Date</th>\n",
+       "      <th>Quantity</th>\n",
+       "      <th>Unit_Price</th>\n",
+       "      <th>Discount</th>\n",
+       "      <th>Revenue</th>\n",
+       "      <th>Discount_Amount</th>\n",
+       "      <th>Final_Sales</th>\n",
+       "      <th>Cost</th>\n",
+       "      <th>Profit</th>\n",
+       "      <th>Profit_Margin</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>count</th>\n",
+       "      <td>1500</td>\n",
+       "      <td>1500.000000</td>\n",
+       "      <td>1500.000000</td>\n",
+       "      <td>1500.000000</td>\n",
+       "      <td>1500.000000</td>\n",
+       "      <td>1500.000000</td>\n",
+       "      <td>1500.000000</td>\n",
+       "      <td>1500.000000</td>\n",
+       "      <td>1500.000000</td>\n",
+       "      <td>1500.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>mean</th>\n",
+       "      <td>2025-07-03 22:54:43.200000</td>\n",
+       "      <td>1.936667</td>\n",
+       "      <td>4030.033333</td>\n",
+       "      <td>0.062233</td>\n",
+       "      <td>7780.033333</td>\n",
+       "      <td>488.060000</td>\n",
+       "      <td>7291.973333</td>\n",
+       "      <td>4777.925517</td>\n",
+       "      <td>2514.047817</td>\n",
+       "      <td>0.350440</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>min</th>\n",
+       "      <td>2025-01-01 00:00:00</td>\n",
+       "      <td>1.000000</td>\n",
+       "      <td>450.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>450.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>360.000000</td>\n",
+       "      <td>198.000000</td>\n",
+       "      <td>162.000000</td>\n",
+       "      <td>0.280000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>25%</th>\n",
+       "      <td>2025-04-02 00:00:00</td>\n",
+       "      <td>1.000000</td>\n",
+       "      <td>1600.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>2250.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>2137.500000</td>\n",
+       "      <td>1320.000000</td>\n",
+       "      <td>729.600000</td>\n",
+       "      <td>0.320000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>50%</th>\n",
+       "      <td>2025-07-06 00:00:00</td>\n",
+       "      <td>2.000000</td>\n",
+       "      <td>2800.000000</td>\n",
+       "      <td>0.050000</td>\n",
+       "      <td>4800.000000</td>\n",
+       "      <td>150.000000</td>\n",
+       "      <td>4400.000000</td>\n",
+       "      <td>2857.600000</td>\n",
+       "      <td>1456.000000</td>\n",
+       "      <td>0.320000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>75%</th>\n",
+       "      <td>2025-10-06 00:00:00</td>\n",
+       "      <td>2.000000</td>\n",
+       "      <td>5200.000000</td>\n",
+       "      <td>0.100000</td>\n",
+       "      <td>8500.000000</td>\n",
+       "      <td>528.750000</td>\n",
+       "      <td>8400.000000</td>\n",
+       "      <td>5400.000000</td>\n",
+       "      <td>2880.000000</td>\n",
+       "      <td>0.380000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>max</th>\n",
+       "      <td>2025-12-31 00:00:00</td>\n",
+       "      <td>30.000000</td>\n",
+       "      <td>22000.000000</td>\n",
+       "      <td>0.200000</td>\n",
+       "      <td>195000.000000</td>\n",
+       "      <td>29250.000000</td>\n",
+       "      <td>165750.000000</td>\n",
+       "      <td>112710.000000</td>\n",
+       "      <td>53040.000000</td>\n",
+       "      <td>0.450000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>std</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>1.470861</td>\n",
+       "      <td>4137.225813</td>\n",
+       "      <td>0.058773</td>\n",
+       "      <td>10628.029278</td>\n",
+       "      <td>1153.007352</td>\n",
+       "      <td>9801.877780</td>\n",
+       "      <td>6345.821414</td>\n",
+       "      <td>3511.851690</td>\n",
+       "      <td>0.062141</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                       Order_Date     Quantity    Unit_Price     Discount  \\\n",
+       "count                        1500  1500.000000   1500.000000  1500.000000   \n",
+       "mean   2025-07-03 22:54:43.200000     1.936667   4030.033333     0.062233   \n",
+       "min           2025-01-01 00:00:00     1.000000    450.000000     0.000000   \n",
+       "25%           2025-04-02 00:00:00     1.000000   1600.000000     0.000000   \n",
+       "50%           2025-07-06 00:00:00     2.000000   2800.000000     0.050000   \n",
+       "75%           2025-10-06 00:00:00     2.000000   5200.000000     0.100000   \n",
+       "max           2025-12-31 00:00:00    30.000000  22000.000000     0.200000   \n",
+       "std                           NaN     1.470861   4137.225813     0.058773   \n",
+       "\n",
+       "             Revenue  Discount_Amount    Final_Sales           Cost  \\\n",
+       "count    1500.000000      1500.000000    1500.000000    1500.000000   \n",
+       "mean     7780.033333       488.060000    7291.973333    4777.925517   \n",
+       "min       450.000000         0.000000     360.000000     198.000000   \n",
+       "25%      2250.000000         0.000000    2137.500000    1320.000000   \n",
+       "50%      4800.000000       150.000000    4400.000000    2857.600000   \n",
+       "75%      8500.000000       528.750000    8400.000000    5400.000000   \n",
+       "max    195000.000000     29250.000000  165750.000000  112710.000000   \n",
+       "std     10628.029278      1153.007352    9801.877780    6345.821414   \n",
+       "\n",
+       "             Profit  Profit_Margin  \n",
+       "count   1500.000000    1500.000000  \n",
+       "mean    2514.047817       0.350440  \n",
+       "min      162.000000       0.280000  \n",
+       "25%      729.600000       0.320000  \n",
+       "50%     1456.000000       0.320000  \n",
+       "75%     2880.000000       0.380000  \n",
+       "max    53040.000000       0.450000  \n",
+       "std     3511.851690       0.062141  "
+      ]
+     },
+     "execution_count": 42,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.describe()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "id": "f1c281ff-4851-4345-91af-4ee16f139725",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.float64(10937960.0)"
+      ]
+     },
+     "execution_count": 43,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Final_Sales\"].sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 44,
+   "id": "50e08ff4-f26d-4a45-8304-b17f1e193b42",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Total Sales: ₹10,937,960.00\n"
+     ]
+    }
+   ],
+   "source": [
+    "total_sales = df[\"Final_Sales\"].sum()\n",
+    "\n",
+    "print(f\"Total Sales: ₹{total_sales:,.2f}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "id": "ffa57295-429c-42a9-aa95-f653067a5f13",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Total Profit: ₹3,771,071.73\n"
+     ]
+    }
+   ],
+   "source": [
+    "total_profit = df[\"Profit\"].sum()\n",
+    "\n",
+    "print(f\"Total Profit: ₹{total_profit:,.2f}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 46,
+   "id": "190b30f1-d030-4e19-ba0b-a1fa8b399928",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Overall Profit Margin: 34.48%\n"
+     ]
+    }
+   ],
+   "source": [
+    "overall_margin = total_profit / total_sales\n",
+    "\n",
+    "print(f\"Overall Profit Margin: {overall_margin:.2%}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "id": "817094f7-a781-4f4b-8916-382cbaf739ad",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "1500"
+      ]
+     },
+     "execution_count": 47,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Order_ID\"].nunique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 48,
+   "id": "98d2bb94-baa3-4e9c-bea9-c82f9448d592",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Average Order Value: ₹7,291.97\n"
+     ]
+    }
+   ],
+   "source": [
+    "average_order_value = (\n",
+    "    df[\"Final_Sales\"].sum() /\n",
+    "    df[\"Order_ID\"].nunique()\n",
+    ")\n",
+    "\n",
+    "print(f\"Average Order Value: ₹{average_order_value:,.2f}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 49,
+   "id": "aced9944-b173-401b-9b89-2d3a0cb61649",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Region\n",
+       "South    4287590.0\n",
+       "West     2883445.0\n",
+       "North    2196257.5\n",
+       "East     1570667.5\n",
+       "Name: Final_Sales, dtype: float64"
+      ]
+     },
+     "execution_count": 49,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "region_sales = (\n",
+    "    df.groupby(\"Region\")[\"Final_Sales\"]\n",
+    "      .sum()\n",
+    "      .sort_values(ascending=False)\n",
+    ")\n",
+    "\n",
+    "region_sales"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 50,
+   "id": "a384b4f1-7e29-4ccc-bbfd-e2fec6bc87a1",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Region\n",
+       "South    39.199174\n",
+       "West     26.361817\n",
+       "North    20.079224\n",
+       "East     14.359785\n",
+       "Name: Final_Sales, dtype: float64"
+      ]
+     },
+     "execution_count": 50,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "region_percentage = (\n",
+    "    region_sales / region_sales.sum() * 100\n",
+    ")\n",
+    "\n",
+    "region_percentage"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 51,
+   "id": "22be8e72-c190-470c-9d40-4f58c2845a9a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Category\n",
+       "Furniture          4507625.0\n",
+       "Home Appliances    2825550.0\n",
+       "Electronics        2731792.5\n",
+       "Accessories         872992.5\n",
+       "Name: Final_Sales, dtype: float64"
+      ]
+     },
+     "execution_count": 51,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "category_sales = (\n",
+    "    df.groupby(\"Category\")[\"Final_Sales\"]\n",
+    "      .sum()\n",
+    "      .sort_values(ascending=False)\n",
+    ")\n",
+    "\n",
+    "category_sales"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 52,
+   "id": "08111021-7207-4e28-be97-4dd8aa103f36",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Category\n",
+       "Furniture          1712897.500\n",
+       "Electronics         874173.600\n",
+       "Home Appliances     791154.000\n",
+       "Accessories         392846.625\n",
+       "Name: Profit, dtype: float64"
+      ]
+     },
+     "execution_count": 52,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "category_profit = (\n",
+    "    df.groupby(\"Category\")[\"Profit\"]\n",
+    "      .sum()\n",
+    "      .sort_values(ascending=False)\n",
+    ")\n",
+    "\n",
+    "category_profit"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 53,
+   "id": "16a60cd5-b343-4524-bcac-d2b797499473",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Total_Sales</th>\n",
+       "      <th>Total_Profit</th>\n",
+       "      <th>Total_Quantity</th>\n",
+       "      <th>Number_of_Orders</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Category</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>Accessories</th>\n",
+       "      <td>872992.5</td>\n",
+       "      <td>392846.625</td>\n",
+       "      <td>659</td>\n",
+       "      <td>326</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Electronics</th>\n",
+       "      <td>2731792.5</td>\n",
+       "      <td>874173.600</td>\n",
+       "      <td>1007</td>\n",
+       "      <td>506</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Furniture</th>\n",
+       "      <td>4507625.0</td>\n",
+       "      <td>1712897.500</td>\n",
+       "      <td>564</td>\n",
+       "      <td>300</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Home Appliances</th>\n",
+       "      <td>2825550.0</td>\n",
+       "      <td>791154.000</td>\n",
+       "      <td>675</td>\n",
+       "      <td>368</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                 Total_Sales  Total_Profit  Total_Quantity  Number_of_Orders\n",
+       "Category                                                                    \n",
+       "Accessories         872992.5    392846.625             659               326\n",
+       "Electronics        2731792.5    874173.600            1007               506\n",
+       "Furniture          4507625.0   1712897.500             564               300\n",
+       "Home Appliances    2825550.0    791154.000             675               368"
+      ]
+     },
+     "execution_count": 53,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "category_analysis = df.groupby(\"Category\").agg(\n",
+    "    Total_Sales=(\"Final_Sales\", \"sum\"),\n",
+    "    Total_Profit=(\"Profit\", \"sum\"),\n",
+    "    Total_Quantity=(\"Quantity\", \"sum\"),\n",
+    "    Number_of_Orders=(\"Order_ID\", \"nunique\")\n",
+    ")\n",
+    "\n",
+    "category_analysis"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 54,
+   "id": "2467412d-e1a3-4230-a881-b76268a89e94",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "category_analysis[\"Profit_Margin\"] = (\n",
+    "    category_analysis[\"Total_Profit\"] /\n",
+    "    category_analysis[\"Total_Sales\"]\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "id": "ac03f6a5-7221-41d2-9fd4-d030951966f5",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Total_Sales</th>\n",
+       "      <th>Total_Profit</th>\n",
+       "      <th>Total_Quantity</th>\n",
+       "      <th>Number_of_Orders</th>\n",
+       "      <th>Profit_Margin</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Category</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>Furniture</th>\n",
+       "      <td>4507625.0</td>\n",
+       "      <td>1712897.500</td>\n",
+       "      <td>564</td>\n",
+       "      <td>300</td>\n",
+       "      <td>0.38</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Electronics</th>\n",
+       "      <td>2731792.5</td>\n",
+       "      <td>874173.600</td>\n",
+       "      <td>1007</td>\n",
+       "      <td>506</td>\n",
+       "      <td>0.32</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Home Appliances</th>\n",
+       "      <td>2825550.0</td>\n",
+       "      <td>791154.000</td>\n",
+       "      <td>675</td>\n",
+       "      <td>368</td>\n",
+       "      <td>0.28</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Accessories</th>\n",
+       "      <td>872992.5</td>\n",
+       "      <td>392846.625</td>\n",
+       "      <td>659</td>\n",
+       "      <td>326</td>\n",
+       "      <td>0.45</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                 Total_Sales  Total_Profit  Total_Quantity  Number_of_Orders  \\\n",
+       "Category                                                                       \n",
+       "Furniture          4507625.0   1712897.500             564               300   \n",
+       "Electronics        2731792.5    874173.600            1007               506   \n",
+       "Home Appliances    2825550.0    791154.000             675               368   \n",
+       "Accessories         872992.5    392846.625             659               326   \n",
+       "\n",
+       "                 Profit_Margin  \n",
+       "Category                        \n",
+       "Furniture                 0.38  \n",
+       "Electronics               0.32  \n",
+       "Home Appliances           0.28  \n",
+       "Accessories               0.45  "
+      ]
+     },
+     "execution_count": 55,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "category_analysis.sort_values(\n",
+    "    \"Total_Profit\",\n",
+    "    ascending=False\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 56,
+   "id": "ab9e9448-1863-49ce-bc13-59b639946ec3",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Product\n",
+       "Sofa                 1959100.0\n",
+       "Smart Watch          1451775.0\n",
+       "Vacuum Cleaner       1102125.0\n",
+       "Study Table          1009800.0\n",
+       "Office Chair          725725.0\n",
+       "Room Heater           551880.0\n",
+       "Bookshelf             541680.0\n",
+       "Air Fryer             513240.0\n",
+       "Headphones            510160.0\n",
+       "Bluetooth Speaker     442640.0\n",
+       "Name: Final_Sales, dtype: float64"
+      ]
+     },
+     "execution_count": 56,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "product_sales = (\n",
+    "    df.groupby(\"Product\")[\"Final_Sales\"]\n",
+    "      .sum()\n",
+    "      .sort_values(ascending=False)\n",
+    ")\n",
+    "\n",
+    "product_sales.head(10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 57,
+   "id": "41fe3844-f523-4223-a4e8-6439dc52d7ae",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Product\n",
+       "Sofa                 744458.0\n",
+       "Smart Watch          464568.0\n",
+       "Study Table          383724.0\n",
+       "Vacuum Cleaner       308595.0\n",
+       "Office Chair         275775.5\n",
+       "Bookshelf            205838.4\n",
+       "Headphones           163251.2\n",
+       "Room Heater          154526.4\n",
+       "Air Fryer            143707.2\n",
+       "Bluetooth Speaker    141644.8\n",
+       "Name: Profit, dtype: float64"
+      ]
+     },
+     "execution_count": 57,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "product_profit = (\n",
+    "    df.groupby(\"Product\")[\"Profit\"]\n",
+    "      .sum()\n",
+    "      .sort_values(ascending=False)\n",
+    ")\n",
+    "\n",
+    "product_profit.head(10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 58,
+   "id": "0f9a9f2f-37be-43e1-838f-6fd4fa9a3dc3",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Product\n",
+       "USB Cable           46192.5\n",
+       "Phone Case          68550.0\n",
+       "Wireless Mouse     127237.5\n",
+       "Keyboard           199980.0\n",
+       "Power Bank         228480.0\n",
+       "Backpack           243090.0\n",
+       "Electric Kettle    256680.0\n",
+       "Side Table         271320.0\n",
+       "Laptop Stand       286680.0\n",
+       "Mixer Grinder      401625.0\n",
+       "Name: Final_Sales, dtype: float64"
+      ]
+     },
+     "execution_count": 58,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "product_sales.sort_values().head(10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 59,
+   "id": "ac54c7bd-96a2-43eb-b680-3836cbb30382",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Orders</th>\n",
+       "      <th>Sales</th>\n",
+       "      <th>Average_Order_Value</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Payment_Mode</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>Cash</th>\n",
+       "      <td>115</td>\n",
+       "      <td>761267.5</td>\n",
+       "      <td>6619.717391</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Credit Card</th>\n",
+       "      <td>369</td>\n",
+       "      <td>2999417.5</td>\n",
+       "      <td>8128.502710</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Debit Card</th>\n",
+       "      <td>300</td>\n",
+       "      <td>2190942.5</td>\n",
+       "      <td>7303.141667</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Net Banking</th>\n",
+       "      <td>124</td>\n",
+       "      <td>827080.0</td>\n",
+       "      <td>6670.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>UPI</th>\n",
+       "      <td>587</td>\n",
+       "      <td>4131052.5</td>\n",
+       "      <td>7037.568143</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Unknown</th>\n",
+       "      <td>5</td>\n",
+       "      <td>28200.0</td>\n",
+       "      <td>5640.000000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "              Orders      Sales  Average_Order_Value\n",
+       "Payment_Mode                                        \n",
+       "Cash             115   761267.5          6619.717391\n",
+       "Credit Card      369  2999417.5          8128.502710\n",
+       "Debit Card       300  2190942.5          7303.141667\n",
+       "Net Banking      124   827080.0          6670.000000\n",
+       "UPI              587  4131052.5          7037.568143\n",
+       "Unknown            5    28200.0          5640.000000"
+      ]
+     },
+     "execution_count": 59,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "payment_analysis = df.groupby(\"Payment_Mode\").agg(\n",
+    "    Orders=(\"Order_ID\", \"nunique\"),\n",
+    "    Sales=(\"Final_Sales\", \"sum\"),\n",
+    "    Average_Order_Value=(\"Final_Sales\", \"mean\")\n",
+    ")\n",
+    "\n",
+    "payment_analysis"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 60,
+   "id": "5d820745-430b-46cb-adee-04c31bf857bb",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Orders</th>\n",
+       "      <th>Sales</th>\n",
+       "      <th>Average_Order_Value</th>\n",
+       "      <th>Profit</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Customer_Type</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>New</th>\n",
+       "      <td>533</td>\n",
+       "      <td>3843547.5</td>\n",
+       "      <td>7211.158537</td>\n",
+       "      <td>1322166.000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Returning</th>\n",
+       "      <td>962</td>\n",
+       "      <td>7049542.5</td>\n",
+       "      <td>7328.006757</td>\n",
+       "      <td>2432314.725</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Unknown</th>\n",
+       "      <td>5</td>\n",
+       "      <td>44870.0</td>\n",
+       "      <td>8974.000000</td>\n",
+       "      <td>16591.000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "               Orders      Sales  Average_Order_Value       Profit\n",
+       "Customer_Type                                                     \n",
+       "New               533  3843547.5          7211.158537  1322166.000\n",
+       "Returning         962  7049542.5          7328.006757  2432314.725\n",
+       "Unknown             5    44870.0          8974.000000    16591.000"
+      ]
+     },
+     "execution_count": 60,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "customer_type_analysis = df.groupby(\"Customer_Type\").agg(\n",
+    "    Orders=(\"Order_ID\", \"nunique\"),\n",
+    "    Sales=(\"Final_Sales\", \"sum\"),\n",
+    "    Average_Order_Value=(\"Final_Sales\", \"mean\"),\n",
+    "    Profit=(\"Profit\", \"sum\")\n",
+    ")\n",
+    "\n",
+    "customer_type_analysis"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 61,
+   "id": "fba8561c-b883-4658-b08b-79c77b820385",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Customer_ID  Customer_Name\n",
+       "C1071        Customer_1071    183640.0\n",
+       "C1192        Customer_1192    134395.0\n",
+       "C1152        Customer_1152    108775.0\n",
+       "C1049        Customer_1049    104135.0\n",
+       "C1294        Customer_1294    102140.0\n",
+       "C1273        Customer_1273     97042.5\n",
+       "C1072        Customer_1072     94140.0\n",
+       "C1033        Customer_1033     93625.0\n",
+       "C1086        Customer_1086     93560.0\n",
+       "C1246        Customer_1246     92500.0\n",
+       "Name: Final_Sales, dtype: float64"
+      ]
+     },
+     "execution_count": 61,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "top_customers = (\n",
+    "    df.groupby([\"Customer_ID\", \"Customer_Name\"])[\"Final_Sales\"]\n",
+    "      .sum()\n",
+    "      .sort_values(ascending=False)\n",
+    "      .head(10)\n",
+    ")\n",
+    "\n",
+    "top_customers"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 62,
+   "id": "a1524175-05c1-4344-a9ba-3526ebc5665e",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th>Total_Sales</th>\n",
+       "      <th>Total_Profit</th>\n",
+       "      <th>Orders</th>\n",
+       "      <th>Total_Quantity</th>\n",
+       "      <th>Average_Order_Value</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Customer_ID</th>\n",
+       "      <th>Customer_Name</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>C1071</th>\n",
+       "      <th>Customer_1071</th>\n",
+       "      <td>183640.0</td>\n",
+       "      <td>58651.000</td>\n",
+       "      <td>6</td>\n",
+       "      <td>37</td>\n",
+       "      <td>30606.666667</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>C1192</th>\n",
+       "      <th>Customer_1192</th>\n",
+       "      <td>134395.0</td>\n",
+       "      <td>46587.200</td>\n",
+       "      <td>9</td>\n",
+       "      <td>14</td>\n",
+       "      <td>14932.777778</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>C1152</th>\n",
+       "      <th>Customer_1152</th>\n",
+       "      <td>108775.0</td>\n",
+       "      <td>38523.600</td>\n",
+       "      <td>9</td>\n",
+       "      <td>18</td>\n",
+       "      <td>12086.111111</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>C1049</th>\n",
+       "      <th>Customer_1049</th>\n",
+       "      <td>104135.0</td>\n",
+       "      <td>37068.400</td>\n",
+       "      <td>7</td>\n",
+       "      <td>14</td>\n",
+       "      <td>14876.428571</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>C1294</th>\n",
+       "      <th>Customer_1294</th>\n",
+       "      <td>102140.0</td>\n",
+       "      <td>38063.200</td>\n",
+       "      <td>6</td>\n",
+       "      <td>13</td>\n",
+       "      <td>17023.333333</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>C1273</th>\n",
+       "      <th>Customer_1273</th>\n",
+       "      <td>97042.5</td>\n",
+       "      <td>36584.925</td>\n",
+       "      <td>6</td>\n",
+       "      <td>12</td>\n",
+       "      <td>16173.750000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>C1072</th>\n",
+       "      <th>Customer_1072</th>\n",
+       "      <td>94140.0</td>\n",
+       "      <td>35428.800</td>\n",
+       "      <td>9</td>\n",
+       "      <td>26</td>\n",
+       "      <td>10460.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>C1033</th>\n",
+       "      <th>Customer_1033</th>\n",
+       "      <td>93625.0</td>\n",
+       "      <td>34205.600</td>\n",
+       "      <td>7</td>\n",
+       "      <td>12</td>\n",
+       "      <td>13375.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>C1086</th>\n",
+       "      <th>Customer_1086</th>\n",
+       "      <td>93560.0</td>\n",
+       "      <td>36029.600</td>\n",
+       "      <td>6</td>\n",
+       "      <td>12</td>\n",
+       "      <td>15593.333333</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>C1246</th>\n",
+       "      <th>Customer_1246</th>\n",
+       "      <td>92500.0</td>\n",
+       "      <td>35206.100</td>\n",
+       "      <td>9</td>\n",
+       "      <td>13</td>\n",
+       "      <td>10277.777778</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                           Total_Sales  Total_Profit  Orders  Total_Quantity  \\\n",
+       "Customer_ID Customer_Name                                                      \n",
+       "C1071       Customer_1071     183640.0     58651.000       6              37   \n",
+       "C1192       Customer_1192     134395.0     46587.200       9              14   \n",
+       "C1152       Customer_1152     108775.0     38523.600       9              18   \n",
+       "C1049       Customer_1049     104135.0     37068.400       7              14   \n",
+       "C1294       Customer_1294     102140.0     38063.200       6              13   \n",
+       "C1273       Customer_1273      97042.5     36584.925       6              12   \n",
+       "C1072       Customer_1072      94140.0     35428.800       9              26   \n",
+       "C1033       Customer_1033      93625.0     34205.600       7              12   \n",
+       "C1086       Customer_1086      93560.0     36029.600       6              12   \n",
+       "C1246       Customer_1246      92500.0     35206.100       9              13   \n",
+       "\n",
+       "                           Average_Order_Value  \n",
+       "Customer_ID Customer_Name                       \n",
+       "C1071       Customer_1071         30606.666667  \n",
+       "C1192       Customer_1192         14932.777778  \n",
+       "C1152       Customer_1152         12086.111111  \n",
+       "C1049       Customer_1049         14876.428571  \n",
+       "C1294       Customer_1294         17023.333333  \n",
+       "C1273       Customer_1273         16173.750000  \n",
+       "C1072       Customer_1072         10460.000000  \n",
+       "C1033       Customer_1033         13375.000000  \n",
+       "C1086       Customer_1086         15593.333333  \n",
+       "C1246       Customer_1246         10277.777778  "
+      ]
+     },
+     "execution_count": 62,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "customer_analysis = df.groupby(\n",
+    "    [\"Customer_ID\", \"Customer_Name\"]\n",
+    ").agg(\n",
+    "    Total_Sales=(\"Final_Sales\", \"sum\"),\n",
+    "    Total_Profit=(\"Profit\", \"sum\"),\n",
+    "    Orders=(\"Order_ID\", \"nunique\"),\n",
+    "    Total_Quantity=(\"Quantity\", \"sum\")\n",
+    ")\n",
+    "\n",
+    "customer_analysis[\"Average_Order_Value\"] = (\n",
+    "    customer_analysis[\"Total_Sales\"] /\n",
+    "    customer_analysis[\"Orders\"]\n",
+    ")\n",
+    "\n",
+    "customer_analysis.sort_values(\n",
+    "    \"Total_Sales\",\n",
+    "    ascending=False\n",
+    ").head(10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 63,
+   "id": "b8f904ca-1e9a-4c67-985d-57744596429c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "count      1500.000000\n",
+       "mean       7291.973333\n",
+       "std        9801.877780\n",
+       "min         360.000000\n",
+       "25%        2137.500000\n",
+       "50%        4400.000000\n",
+       "75%        8400.000000\n",
+       "max      165750.000000\n",
+       "Name: Final_Sales, dtype: float64"
+      ]
+     },
+     "execution_count": 63,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Final_Sales\"].describe()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 64,
+   "id": "bf93882c-6a8b-494b-9957-1255213188d6",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Q1: 2137.5\n",
+      "Q3: 8400.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "Q1 = np.percentile(df[\"Final_Sales\"], 25)\n",
+    "Q3 = np.percentile(df[\"Final_Sales\"], 75)\n",
+    "\n",
+    "print(\"Q1:\", Q1)\n",
+    "print(\"Q3:\", Q3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 65,
+   "id": "0254897a-bf8c-49ee-978f-88a1a7d2d762",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "IQR: 6262.5\n"
+     ]
+    }
+   ],
+   "source": [
+    "IQR = Q3 - Q1\n",
+    "\n",
+    "print(\"IQR:\", IQR)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 66,
+   "id": "5ba38ad6-5556-43a9-9799-4cf08e27c9c7",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Lower: -7256.25\n",
+      "Upper: 17793.75\n"
+     ]
+    }
+   ],
+   "source": [
+    "lower_bound = Q1 - 1.5 * IQR\n",
+    "upper_bound = Q3 + 1.5 * IQR\n",
+    "\n",
+    "print(\"Lower:\", lower_bound)\n",
+    "print(\"Upper:\", upper_bound)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 67,
+   "id": "ae60a19b-6ae7-4d11-a928-ff70a8606088",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Order_ID</th>\n",
+       "      <th>Order_Date</th>\n",
+       "      <th>Customer_ID</th>\n",
+       "      <th>Customer_Name</th>\n",
+       "      <th>Region</th>\n",
+       "      <th>City</th>\n",
+       "      <th>Category</th>\n",
+       "      <th>Product</th>\n",
+       "      <th>Quantity</th>\n",
+       "      <th>Unit_Price</th>\n",
+       "      <th>Discount</th>\n",
+       "      <th>Payment_Mode</th>\n",
+       "      <th>Customer_Type</th>\n",
+       "      <th>Returned</th>\n",
+       "      <th>Revenue</th>\n",
+       "      <th>Discount_Amount</th>\n",
+       "      <th>Final_Sales</th>\n",
+       "      <th>Cost</th>\n",
+       "      <th>Profit</th>\n",
+       "      <th>Profit_Margin</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>28</th>\n",
+       "      <td>ORD11465</td>\n",
+       "      <td>2025-02-21</td>\n",
+       "      <td>C1291</td>\n",
+       "      <td>Customer_1291</td>\n",
+       "      <td>South</td>\n",
+       "      <td>Bengaluru</td>\n",
+       "      <td>Furniture</td>\n",
+       "      <td>Sofa</td>\n",
+       "      <td>1</td>\n",
+       "      <td>22000</td>\n",
+       "      <td>0.10</td>\n",
+       "      <td>UPI</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>22000</td>\n",
+       "      <td>2200.0</td>\n",
+       "      <td>19800.0</td>\n",
+       "      <td>12276.0</td>\n",
+       "      <td>7524.0</td>\n",
+       "      <td>0.38</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>29</th>\n",
+       "      <td>ORD10634</td>\n",
+       "      <td>2025-12-30</td>\n",
+       "      <td>C1242</td>\n",
+       "      <td>Customer_1242</td>\n",
+       "      <td>North</td>\n",
+       "      <td>Delhi</td>\n",
+       "      <td>Home Appliances</td>\n",
+       "      <td>Vacuum Cleaner</td>\n",
+       "      <td>4</td>\n",
+       "      <td>7500</td>\n",
+       "      <td>0.00</td>\n",
+       "      <td>Credit Card</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>30000</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>30000.0</td>\n",
+       "      <td>21600.0</td>\n",
+       "      <td>8400.0</td>\n",
+       "      <td>0.28</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>39</th>\n",
+       "      <td>ORD11007</td>\n",
+       "      <td>2025-03-28</td>\n",
+       "      <td>C1031</td>\n",
+       "      <td>Customer_1031</td>\n",
+       "      <td>East</td>\n",
+       "      <td>Kolkata</td>\n",
+       "      <td>Electronics</td>\n",
+       "      <td>Smart Watch</td>\n",
+       "      <td>3</td>\n",
+       "      <td>6500</td>\n",
+       "      <td>0.00</td>\n",
+       "      <td>UPI</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>19500</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>19500.0</td>\n",
+       "      <td>13260.0</td>\n",
+       "      <td>6240.0</td>\n",
+       "      <td>0.32</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>44</th>\n",
+       "      <td>ORD10900</td>\n",
+       "      <td>2025-04-26</td>\n",
+       "      <td>C1104</td>\n",
+       "      <td>Customer_1104</td>\n",
+       "      <td>South</td>\n",
+       "      <td>Hyderabad</td>\n",
+       "      <td>Home Appliances</td>\n",
+       "      <td>Vacuum Cleaner</td>\n",
+       "      <td>4</td>\n",
+       "      <td>7500</td>\n",
+       "      <td>0.00</td>\n",
+       "      <td>Cash</td>\n",
+       "      <td>New</td>\n",
+       "      <td>No</td>\n",
+       "      <td>30000</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>30000.0</td>\n",
+       "      <td>21600.0</td>\n",
+       "      <td>8400.0</td>\n",
+       "      <td>0.28</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>48</th>\n",
+       "      <td>ORD11085</td>\n",
+       "      <td>2025-09-20</td>\n",
+       "      <td>C1167</td>\n",
+       "      <td>Customer_1167</td>\n",
+       "      <td>East</td>\n",
+       "      <td>Kolkata</td>\n",
+       "      <td>Furniture</td>\n",
+       "      <td>Study Table</td>\n",
+       "      <td>3</td>\n",
+       "      <td>8500</td>\n",
+       "      <td>0.10</td>\n",
+       "      <td>Credit Card</td>\n",
+       "      <td>New</td>\n",
+       "      <td>No</td>\n",
+       "      <td>25500</td>\n",
+       "      <td>2550.0</td>\n",
+       "      <td>22950.0</td>\n",
+       "      <td>14229.0</td>\n",
+       "      <td>8721.0</td>\n",
+       "      <td>0.38</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>...</th>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1433</th>\n",
+       "      <td>ORD10162</td>\n",
+       "      <td>2025-05-30</td>\n",
+       "      <td>C1108</td>\n",
+       "      <td>Customer_1108</td>\n",
+       "      <td>West</td>\n",
+       "      <td>Mumbai</td>\n",
+       "      <td>Furniture</td>\n",
+       "      <td>Office Chair</td>\n",
+       "      <td>3</td>\n",
+       "      <td>6500</td>\n",
+       "      <td>0.00</td>\n",
+       "      <td>Credit Card</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>19500</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>19500.0</td>\n",
+       "      <td>12090.0</td>\n",
+       "      <td>7410.0</td>\n",
+       "      <td>0.38</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1471</th>\n",
+       "      <td>ORD10687</td>\n",
+       "      <td>2025-04-21</td>\n",
+       "      <td>C1321</td>\n",
+       "      <td>Customer_1321</td>\n",
+       "      <td>North</td>\n",
+       "      <td>Lucknow</td>\n",
+       "      <td>Furniture</td>\n",
+       "      <td>Sofa</td>\n",
+       "      <td>3</td>\n",
+       "      <td>22000</td>\n",
+       "      <td>0.05</td>\n",
+       "      <td>Net Banking</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>66000</td>\n",
+       "      <td>3300.0</td>\n",
+       "      <td>62700.0</td>\n",
+       "      <td>38874.0</td>\n",
+       "      <td>23826.0</td>\n",
+       "      <td>0.38</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1495</th>\n",
+       "      <td>ORD10131</td>\n",
+       "      <td>2025-06-28</td>\n",
+       "      <td>C1102</td>\n",
+       "      <td>Customer_1102</td>\n",
+       "      <td>South</td>\n",
+       "      <td>Bengaluru</td>\n",
+       "      <td>Furniture</td>\n",
+       "      <td>Office Chair</td>\n",
+       "      <td>4</td>\n",
+       "      <td>6500</td>\n",
+       "      <td>0.10</td>\n",
+       "      <td>UPI</td>\n",
+       "      <td>New</td>\n",
+       "      <td>No</td>\n",
+       "      <td>26000</td>\n",
+       "      <td>2600.0</td>\n",
+       "      <td>23400.0</td>\n",
+       "      <td>14508.0</td>\n",
+       "      <td>8892.0</td>\n",
+       "      <td>0.38</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1501</th>\n",
+       "      <td>ORD10331</td>\n",
+       "      <td>2025-08-27</td>\n",
+       "      <td>C1141</td>\n",
+       "      <td>Customer_1141</td>\n",
+       "      <td>West</td>\n",
+       "      <td>Mumbai</td>\n",
+       "      <td>Furniture</td>\n",
+       "      <td>Study Table</td>\n",
+       "      <td>3</td>\n",
+       "      <td>8500</td>\n",
+       "      <td>0.10</td>\n",
+       "      <td>Debit Card</td>\n",
+       "      <td>Returning</td>\n",
+       "      <td>No</td>\n",
+       "      <td>25500</td>\n",
+       "      <td>2550.0</td>\n",
+       "      <td>22950.0</td>\n",
+       "      <td>14229.0</td>\n",
+       "      <td>8721.0</td>\n",
+       "      <td>0.38</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1511</th>\n",
+       "      <td>ORD11127</td>\n",
+       "      <td>2025-01-15</td>\n",
+       "      <td>C1083</td>\n",
+       "      <td>Customer_1083</td>\n",
+       "      <td>West</td>\n",
+       "      <td>Pune</td>\n",
+       "      <td>Home Appliances</td>\n",
+       "      <td>Vacuum Cleaner</td>\n",
+       "      <td>4</td>\n",
+       "      <td>7500</td>\n",
+       "      <td>0.05</td>\n",
+       "      <td>Credit Card</td>\n",
+       "      <td>New</td>\n",
+       "      <td>No</td>\n",
+       "      <td>30000</td>\n",
+       "      <td>1500.0</td>\n",
+       "      <td>28500.0</td>\n",
+       "      <td>20520.0</td>\n",
+       "      <td>7980.0</td>\n",
+       "      <td>0.28</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>134 rows × 20 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      Order_ID Order_Date Customer_ID  Customer_Name Region       City  \\\n",
+       "28    ORD11465 2025-02-21       C1291  Customer_1291  South  Bengaluru   \n",
+       "29    ORD10634 2025-12-30       C1242  Customer_1242  North      Delhi   \n",
+       "39    ORD11007 2025-03-28       C1031  Customer_1031   East    Kolkata   \n",
+       "44    ORD10900 2025-04-26       C1104  Customer_1104  South  Hyderabad   \n",
+       "48    ORD11085 2025-09-20       C1167  Customer_1167   East    Kolkata   \n",
+       "...        ...        ...         ...            ...    ...        ...   \n",
+       "1433  ORD10162 2025-05-30       C1108  Customer_1108   West     Mumbai   \n",
+       "1471  ORD10687 2025-04-21       C1321  Customer_1321  North    Lucknow   \n",
+       "1495  ORD10131 2025-06-28       C1102  Customer_1102  South  Bengaluru   \n",
+       "1501  ORD10331 2025-08-27       C1141  Customer_1141   West     Mumbai   \n",
+       "1511  ORD11127 2025-01-15       C1083  Customer_1083   West       Pune   \n",
+       "\n",
+       "             Category         Product  Quantity  Unit_Price  Discount  \\\n",
+       "28          Furniture            Sofa         1       22000      0.10   \n",
+       "29    Home Appliances  Vacuum Cleaner         4        7500      0.00   \n",
+       "39        Electronics     Smart Watch         3        6500      0.00   \n",
+       "44    Home Appliances  Vacuum Cleaner         4        7500      0.00   \n",
+       "48          Furniture     Study Table         3        8500      0.10   \n",
+       "...               ...             ...       ...         ...       ...   \n",
+       "1433        Furniture    Office Chair         3        6500      0.00   \n",
+       "1471        Furniture            Sofa         3       22000      0.05   \n",
+       "1495        Furniture    Office Chair         4        6500      0.10   \n",
+       "1501        Furniture     Study Table         3        8500      0.10   \n",
+       "1511  Home Appliances  Vacuum Cleaner         4        7500      0.05   \n",
+       "\n",
+       "     Payment_Mode Customer_Type Returned  Revenue  Discount_Amount  \\\n",
+       "28            UPI     Returning       No    22000           2200.0   \n",
+       "29    Credit Card     Returning       No    30000              0.0   \n",
+       "39            UPI     Returning       No    19500              0.0   \n",
+       "44           Cash           New       No    30000              0.0   \n",
+       "48    Credit Card           New       No    25500           2550.0   \n",
+       "...           ...           ...      ...      ...              ...   \n",
+       "1433  Credit Card     Returning       No    19500              0.0   \n",
+       "1471  Net Banking     Returning       No    66000           3300.0   \n",
+       "1495          UPI           New       No    26000           2600.0   \n",
+       "1501   Debit Card     Returning       No    25500           2550.0   \n",
+       "1511  Credit Card           New       No    30000           1500.0   \n",
+       "\n",
+       "      Final_Sales     Cost   Profit  Profit_Margin  \n",
+       "28        19800.0  12276.0   7524.0           0.38  \n",
+       "29        30000.0  21600.0   8400.0           0.28  \n",
+       "39        19500.0  13260.0   6240.0           0.32  \n",
+       "44        30000.0  21600.0   8400.0           0.28  \n",
+       "48        22950.0  14229.0   8721.0           0.38  \n",
+       "...           ...      ...      ...            ...  \n",
+       "1433      19500.0  12090.0   7410.0           0.38  \n",
+       "1471      62700.0  38874.0  23826.0           0.38  \n",
+       "1495      23400.0  14508.0   8892.0           0.38  \n",
+       "1501      22950.0  14229.0   8721.0           0.38  \n",
+       "1511      28500.0  20520.0   7980.0           0.28  \n",
+       "\n",
+       "[134 rows x 20 columns]"
+      ]
+     },
+     "execution_count": 67,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "outliers = df[\n",
+    "    (df[\"Final_Sales\"] < lower_bound) |\n",
+    "    (df[\"Final_Sales\"] > upper_bound)\n",
+    "]\n",
+    "\n",
+    "outliers"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 68,
+   "id": "4bc9f720-4e1e-428c-8a8e-7b28491aa04b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df.to_csv(\n",
+    "    \"cleaned_retail_sales.csv\",\n",
+    "    index=False\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 69,
+   "id": "4e6f6741-a3ee-4274-a80e-efd6da64f48b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.float64(10937960.0)"
+      ]
+     },
+     "execution_count": 69,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Final_Sales\"].sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 70,
+   "id": "121e058f-d8c8-44be-9887-e4cdffd68495",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.float64(3771071.725)"
+      ]
+     },
+     "execution_count": 70,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Profit\"].sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 71,
+   "id": "f5a399dd-8637-44b5-904d-1bc4656d03c7",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Region\n",
+       "South    4287590.0\n",
+       "West     2883445.0\n",
+       "North    2196257.5\n",
+       "East     1570667.5\n",
+       "Name: Final_Sales, dtype: float64"
+      ]
+     },
+     "execution_count": 71,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.groupby(\"Region\")[\"Final_Sales\"].sum().sort_values(ascending=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 72,
+   "id": "f5f71141-dfd9-4844-889f-698414ba94c8",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Category\n",
+       "Furniture          4507625.0\n",
+       "Home Appliances    2825550.0\n",
+       "Electronics        2731792.5\n",
+       "Accessories         872992.5\n",
+       "Name: Final_Sales, dtype: float64"
+      ]
+     },
+     "execution_count": 72,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.groupby(\"Category\")[\"Final_Sales\"].sum().sort_values(ascending=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 73,
+   "id": "870bda94-4fe5-4101-a695-19c794245d5b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Product\n",
+       "Sofa                 1959100.0\n",
+       "Smart Watch          1451775.0\n",
+       "Vacuum Cleaner       1102125.0\n",
+       "Study Table          1009800.0\n",
+       "Office Chair          725725.0\n",
+       "Room Heater           551880.0\n",
+       "Bookshelf             541680.0\n",
+       "Air Fryer             513240.0\n",
+       "Headphones            510160.0\n",
+       "Bluetooth Speaker     442640.0\n",
+       "Name: Final_Sales, dtype: float64"
+      ]
+     },
+     "execution_count": 73,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.groupby(\"Product\")[\"Final_Sales\"].sum().sort_values(ascending=False).head(10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 74,
+   "id": "e3ed064e-3802-40af-b6c9-34b54282642b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "dtype('<M8[us]')"
+      ]
+     },
+     "execution_count": 74,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"Order_Date\"].dtype"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 76,
+   "id": "69682d93-16e4-4802-a39b-1c37317c0a77",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"Order_Date\"] = pd.to_datetime(df[\"Order_Date\"])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 77,
+   "id": "af136cee-cdd1-4251-beba-e928646b2c95",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"Year\"] = df[\"Order_Date\"].dt.year"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 78,
+   "id": "280592ba-074d-4e08-97a4-dd55d5b616fd",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"Month\"] = df[\"Order_Date\"].dt.month"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 79,
+   "id": "a99dc915-eb12-4483-8c31-dabd32ecdf28",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"Month_Name\"] = df[\"Order_Date\"].dt.month_name()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 80,
+   "id": "50f8dcea-ea7e-4e05-a461-36cb84154341",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Order_Date</th>\n",
+       "      <th>Year</th>\n",
+       "      <th>Month</th>\n",
+       "      <th>Month_Name</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>2025-01-13</td>\n",
+       "      <td>2025</td>\n",
+       "      <td>1</td>\n",
+       "      <td>January</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>2025-08-06</td>\n",
+       "      <td>2025</td>\n",
+       "      <td>8</td>\n",
+       "      <td>August</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2025-05-16</td>\n",
+       "      <td>2025</td>\n",
+       "      <td>5</td>\n",
+       "      <td>May</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>2025-10-04</td>\n",
+       "      <td>2025</td>\n",
+       "      <td>10</td>\n",
+       "      <td>October</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>2025-10-10</td>\n",
+       "      <td>2025</td>\n",
+       "      <td>10</td>\n",
+       "      <td>October</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  Order_Date  Year  Month Month_Name\n",
+       "0 2025-01-13  2025      1    January\n",
+       "1 2025-08-06  2025      8     August\n",
+       "2 2025-05-16  2025      5        May\n",
+       "3 2025-10-04  2025     10    October\n",
+       "4 2025-10-10  2025     10    October"
+      ]
+     },
+     "execution_count": 80,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[[\"Order_Date\", \"Year\", \"Month\", \"Month_Name\"]].head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 81,
+   "id": "3b182d07-b808-4755-9b97-c3a58dc678b8",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Month\n",
+       "1      966995.0\n",
+       "2      716975.0\n",
+       "3      995797.5\n",
+       "4      893050.0\n",
+       "5      820145.0\n",
+       "6      854982.5\n",
+       "7      753082.5\n",
+       "8      960587.5\n",
+       "9      834415.0\n",
+       "10    1028277.5\n",
+       "11    1001580.0\n",
+       "12    1112072.5\n",
+       "Name: Final_Sales, dtype: float64"
+      ]
+     },
+     "execution_count": 81,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_sales = (\n",
+    "    df.groupby(\"Month\")[\"Final_Sales\"]\n",
+    "      .sum()\n",
+    ")\n",
+    "\n",
+    "monthly_sales"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 82,
+   "id": "c51c4d71-101d-4970-a6c1-e750ccf35a10",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"Year_Month\"] = df[\"Order_Date\"].dt.to_period(\"M\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 83,
+   "id": "04f9373f-32fe-4e39-92cb-b8c1d007a63b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Order_Date</th>\n",
+       "      <th>Year_Month</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>2025-01-13</td>\n",
+       "      <td>2025-01</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>2025-08-06</td>\n",
+       "      <td>2025-08</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2025-05-16</td>\n",
+       "      <td>2025-05</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>2025-10-04</td>\n",
+       "      <td>2025-10</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>2025-10-10</td>\n",
+       "      <td>2025-10</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  Order_Date Year_Month\n",
+       "0 2025-01-13    2025-01\n",
+       "1 2025-08-06    2025-08\n",
+       "2 2025-05-16    2025-05\n",
+       "3 2025-10-04    2025-10\n",
+       "4 2025-10-10    2025-10"
+      ]
+     },
+     "execution_count": 83,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[[\"Order_Date\", \"Year_Month\"]].head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 84,
+   "id": "f5289ae7-70ba-4cf3-b44e-cb09dff544f2",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Year_Month\n",
+       "2025-01     966995.0\n",
+       "2025-02     716975.0\n",
+       "2025-03     995797.5\n",
+       "2025-04     893050.0\n",
+       "2025-05     820145.0\n",
+       "2025-06     854982.5\n",
+       "2025-07     753082.5\n",
+       "2025-08     960587.5\n",
+       "2025-09     834415.0\n",
+       "2025-10    1028277.5\n",
+       "2025-11    1001580.0\n",
+       "2025-12    1112072.5\n",
+       "Freq: M, Name: Final_Sales, dtype: float64"
+      ]
+     },
+     "execution_count": 84,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_sales = (\n",
+    "    df.groupby(\"Year_Month\")[\"Final_Sales\"]\n",
+    "      .sum()\n",
+    ")\n",
+    "\n",
+    "monthly_sales"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 85,
+   "id": "0bbcf536-bd48-4fd8-9fa0-984510e9c7a1",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Period('2025-12', 'M')"
+      ]
+     },
+     "execution_count": 85,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_sales.idxmax()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 86,
+   "id": "5eee7f88-b7c1-4cbc-8c20-c6ad43e95fc2",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.float64(1112072.5)"
+      ]
+     },
+     "execution_count": 86,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_sales.max()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 87,
+   "id": "fa310786-b866-4d1c-af3f-a5fc48d606d2",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Period('2025-02', 'M')"
+      ]
+     },
+     "execution_count": 87,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_sales.idxmin()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 88,
+   "id": "77cba5b6-0ec8-4e05-903c-46df96362122",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.float64(716975.0)"
+      ]
+     },
+     "execution_count": 88,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_sales.min()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 89,
+   "id": "6a4e49c6-6f13-47aa-aa47-ec48be15d749",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Year_Month\n",
+       "2025-01    329540.675\n",
+       "2025-02    241156.500\n",
+       "2025-03    347240.325\n",
+       "2025-04    307050.925\n",
+       "2025-05    279040.875\n",
+       "2025-06    300865.250\n",
+       "2025-07    261046.700\n",
+       "2025-08    328937.550\n",
+       "2025-09    290717.975\n",
+       "2025-10    364606.350\n",
+       "2025-11    341517.975\n",
+       "2025-12    379350.625\n",
+       "Freq: M, Name: Profit, dtype: float64"
+      ]
+     },
+     "execution_count": 89,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_profit = (\n",
+    "    df.groupby(\"Year_Month\")[\"Profit\"]\n",
+    "      .sum()\n",
+    ")\n",
+    "\n",
+    "monthly_profit"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 90,
+   "id": "5a0db1a5-03f2-421f-bc64-7728bdd015ea",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Sales</th>\n",
+       "      <th>Profit</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Year_Month</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>2025-01</th>\n",
+       "      <td>966995.0</td>\n",
+       "      <td>329540.675</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-02</th>\n",
+       "      <td>716975.0</td>\n",
+       "      <td>241156.500</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-03</th>\n",
+       "      <td>995797.5</td>\n",
+       "      <td>347240.325</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-04</th>\n",
+       "      <td>893050.0</td>\n",
+       "      <td>307050.925</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-05</th>\n",
+       "      <td>820145.0</td>\n",
+       "      <td>279040.875</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-06</th>\n",
+       "      <td>854982.5</td>\n",
+       "      <td>300865.250</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-07</th>\n",
+       "      <td>753082.5</td>\n",
+       "      <td>261046.700</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-08</th>\n",
+       "      <td>960587.5</td>\n",
+       "      <td>328937.550</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-09</th>\n",
+       "      <td>834415.0</td>\n",
+       "      <td>290717.975</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-10</th>\n",
+       "      <td>1028277.5</td>\n",
+       "      <td>364606.350</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-11</th>\n",
+       "      <td>1001580.0</td>\n",
+       "      <td>341517.975</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-12</th>\n",
+       "      <td>1112072.5</td>\n",
+       "      <td>379350.625</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                Sales      Profit\n",
+       "Year_Month                       \n",
+       "2025-01      966995.0  329540.675\n",
+       "2025-02      716975.0  241156.500\n",
+       "2025-03      995797.5  347240.325\n",
+       "2025-04      893050.0  307050.925\n",
+       "2025-05      820145.0  279040.875\n",
+       "2025-06      854982.5  300865.250\n",
+       "2025-07      753082.5  261046.700\n",
+       "2025-08      960587.5  328937.550\n",
+       "2025-09      834415.0  290717.975\n",
+       "2025-10     1028277.5  364606.350\n",
+       "2025-11     1001580.0  341517.975\n",
+       "2025-12     1112072.5  379350.625"
+      ]
+     },
+     "execution_count": 90,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_analysis = pd.DataFrame({\n",
+    "    \"Sales\": monthly_sales,\n",
+    "    \"Profit\": monthly_profit\n",
+    "})\n",
+    "\n",
+    "monthly_analysis"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 91,
+   "id": "5d38f4bf-1c95-44fc-85f6-a4724c13fac0",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "monthly_analysis[\"Profit_Margin\"] = (\n",
+    "    monthly_analysis[\"Profit\"] /\n",
+    "    monthly_analysis[\"Sales\"]\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 92,
+   "id": "c151514a-0c6f-47b6-b310-61b4280dc5ea",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Sales</th>\n",
+       "      <th>Profit</th>\n",
+       "      <th>Profit_Margin</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Year_Month</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>2025-01</th>\n",
+       "      <td>966995.0</td>\n",
+       "      <td>329540.675</td>\n",
+       "      <td>0.340788</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-02</th>\n",
+       "      <td>716975.0</td>\n",
+       "      <td>241156.500</td>\n",
+       "      <td>0.336353</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-03</th>\n",
+       "      <td>995797.5</td>\n",
+       "      <td>347240.325</td>\n",
+       "      <td>0.348706</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-04</th>\n",
+       "      <td>893050.0</td>\n",
+       "      <td>307050.925</td>\n",
+       "      <td>0.343823</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-05</th>\n",
+       "      <td>820145.0</td>\n",
+       "      <td>279040.875</td>\n",
+       "      <td>0.340234</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-06</th>\n",
+       "      <td>854982.5</td>\n",
+       "      <td>300865.250</td>\n",
+       "      <td>0.351896</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-07</th>\n",
+       "      <td>753082.5</td>\n",
+       "      <td>261046.700</td>\n",
+       "      <td>0.346638</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-08</th>\n",
+       "      <td>960587.5</td>\n",
+       "      <td>328937.550</td>\n",
+       "      <td>0.342434</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-09</th>\n",
+       "      <td>834415.0</td>\n",
+       "      <td>290717.975</td>\n",
+       "      <td>0.348409</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-10</th>\n",
+       "      <td>1028277.5</td>\n",
+       "      <td>364606.350</td>\n",
+       "      <td>0.354580</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-11</th>\n",
+       "      <td>1001580.0</td>\n",
+       "      <td>341517.975</td>\n",
+       "      <td>0.340979</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-12</th>\n",
+       "      <td>1112072.5</td>\n",
+       "      <td>379350.625</td>\n",
+       "      <td>0.341120</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                Sales      Profit  Profit_Margin\n",
+       "Year_Month                                      \n",
+       "2025-01      966995.0  329540.675       0.340788\n",
+       "2025-02      716975.0  241156.500       0.336353\n",
+       "2025-03      995797.5  347240.325       0.348706\n",
+       "2025-04      893050.0  307050.925       0.343823\n",
+       "2025-05      820145.0  279040.875       0.340234\n",
+       "2025-06      854982.5  300865.250       0.351896\n",
+       "2025-07      753082.5  261046.700       0.346638\n",
+       "2025-08      960587.5  328937.550       0.342434\n",
+       "2025-09      834415.0  290717.975       0.348409\n",
+       "2025-10     1028277.5  364606.350       0.354580\n",
+       "2025-11     1001580.0  341517.975       0.340979\n",
+       "2025-12     1112072.5  379350.625       0.341120"
+      ]
+     },
+     "execution_count": 92,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_analysis"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 93,
+   "id": "1489633e-95bc-43dc-8d51-3c11dfc4261d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "monthly_analysis[\"Sales_Growth\"] = (\n",
+    "    monthly_analysis[\"Sales\"].pct_change()\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 94,
+   "id": "459bfb98-714c-4342-bccf-e0ad99b28fff",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Sales</th>\n",
+       "      <th>Profit</th>\n",
+       "      <th>Profit_Margin</th>\n",
+       "      <th>Sales_Growth</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Year_Month</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>2025-01</th>\n",
+       "      <td>966995.0</td>\n",
+       "      <td>329540.675</td>\n",
+       "      <td>0.340788</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-02</th>\n",
+       "      <td>716975.0</td>\n",
+       "      <td>241156.500</td>\n",
+       "      <td>0.336353</td>\n",
+       "      <td>-0.258554</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-03</th>\n",
+       "      <td>995797.5</td>\n",
+       "      <td>347240.325</td>\n",
+       "      <td>0.348706</td>\n",
+       "      <td>0.388887</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-04</th>\n",
+       "      <td>893050.0</td>\n",
+       "      <td>307050.925</td>\n",
+       "      <td>0.343823</td>\n",
+       "      <td>-0.103181</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-05</th>\n",
+       "      <td>820145.0</td>\n",
+       "      <td>279040.875</td>\n",
+       "      <td>0.340234</td>\n",
+       "      <td>-0.081636</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-06</th>\n",
+       "      <td>854982.5</td>\n",
+       "      <td>300865.250</td>\n",
+       "      <td>0.351896</td>\n",
+       "      <td>0.042477</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-07</th>\n",
+       "      <td>753082.5</td>\n",
+       "      <td>261046.700</td>\n",
+       "      <td>0.346638</td>\n",
+       "      <td>-0.119184</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-08</th>\n",
+       "      <td>960587.5</td>\n",
+       "      <td>328937.550</td>\n",
+       "      <td>0.342434</td>\n",
+       "      <td>0.275541</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-09</th>\n",
+       "      <td>834415.0</td>\n",
+       "      <td>290717.975</td>\n",
+       "      <td>0.348409</td>\n",
+       "      <td>-0.131349</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-10</th>\n",
+       "      <td>1028277.5</td>\n",
+       "      <td>364606.350</td>\n",
+       "      <td>0.354580</td>\n",
+       "      <td>0.232333</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-11</th>\n",
+       "      <td>1001580.0</td>\n",
+       "      <td>341517.975</td>\n",
+       "      <td>0.340979</td>\n",
+       "      <td>-0.025963</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-12</th>\n",
+       "      <td>1112072.5</td>\n",
+       "      <td>379350.625</td>\n",
+       "      <td>0.341120</td>\n",
+       "      <td>0.110318</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                Sales      Profit  Profit_Margin  Sales_Growth\n",
+       "Year_Month                                                    \n",
+       "2025-01      966995.0  329540.675       0.340788           NaN\n",
+       "2025-02      716975.0  241156.500       0.336353     -0.258554\n",
+       "2025-03      995797.5  347240.325       0.348706      0.388887\n",
+       "2025-04      893050.0  307050.925       0.343823     -0.103181\n",
+       "2025-05      820145.0  279040.875       0.340234     -0.081636\n",
+       "2025-06      854982.5  300865.250       0.351896      0.042477\n",
+       "2025-07      753082.5  261046.700       0.346638     -0.119184\n",
+       "2025-08      960587.5  328937.550       0.342434      0.275541\n",
+       "2025-09      834415.0  290717.975       0.348409     -0.131349\n",
+       "2025-10     1028277.5  364606.350       0.354580      0.232333\n",
+       "2025-11     1001580.0  341517.975       0.340979     -0.025963\n",
+       "2025-12     1112072.5  379350.625       0.341120      0.110318"
+      ]
+     },
+     "execution_count": 94,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_analysis"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 95,
+   "id": "dca85db1-e052-4cb3-b851-0645b5035d3e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "monthly_analysis[\"Sales_Growth_%\"] = (\n",
+    "    monthly_analysis[\"Sales_Growth\"] * 100\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 96,
+   "id": "49b0cc50-5744-4017-820e-7404f46fc1a1",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Sales</th>\n",
+       "      <th>Profit</th>\n",
+       "      <th>Profit_Margin</th>\n",
+       "      <th>Sales_Growth</th>\n",
+       "      <th>Sales_Growth_%</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Year_Month</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>2025-01</th>\n",
+       "      <td>966995.0</td>\n",
+       "      <td>329540.675</td>\n",
+       "      <td>0.340788</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-02</th>\n",
+       "      <td>716975.0</td>\n",
+       "      <td>241156.500</td>\n",
+       "      <td>0.336353</td>\n",
+       "      <td>-0.258554</td>\n",
+       "      <td>-25.855356</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-03</th>\n",
+       "      <td>995797.5</td>\n",
+       "      <td>347240.325</td>\n",
+       "      <td>0.348706</td>\n",
+       "      <td>0.388887</td>\n",
+       "      <td>38.888734</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-04</th>\n",
+       "      <td>893050.0</td>\n",
+       "      <td>307050.925</td>\n",
+       "      <td>0.343823</td>\n",
+       "      <td>-0.103181</td>\n",
+       "      <td>-10.318112</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-05</th>\n",
+       "      <td>820145.0</td>\n",
+       "      <td>279040.875</td>\n",
+       "      <td>0.340234</td>\n",
+       "      <td>-0.081636</td>\n",
+       "      <td>-8.163597</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-06</th>\n",
+       "      <td>854982.5</td>\n",
+       "      <td>300865.250</td>\n",
+       "      <td>0.351896</td>\n",
+       "      <td>0.042477</td>\n",
+       "      <td>4.247724</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-07</th>\n",
+       "      <td>753082.5</td>\n",
+       "      <td>261046.700</td>\n",
+       "      <td>0.346638</td>\n",
+       "      <td>-0.119184</td>\n",
+       "      <td>-11.918373</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-08</th>\n",
+       "      <td>960587.5</td>\n",
+       "      <td>328937.550</td>\n",
+       "      <td>0.342434</td>\n",
+       "      <td>0.275541</td>\n",
+       "      <td>27.554086</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-09</th>\n",
+       "      <td>834415.0</td>\n",
+       "      <td>290717.975</td>\n",
+       "      <td>0.348409</td>\n",
+       "      <td>-0.131349</td>\n",
+       "      <td>-13.134930</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-10</th>\n",
+       "      <td>1028277.5</td>\n",
+       "      <td>364606.350</td>\n",
+       "      <td>0.354580</td>\n",
+       "      <td>0.232333</td>\n",
+       "      <td>23.233343</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-11</th>\n",
+       "      <td>1001580.0</td>\n",
+       "      <td>341517.975</td>\n",
+       "      <td>0.340979</td>\n",
+       "      <td>-0.025963</td>\n",
+       "      <td>-2.596332</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-12</th>\n",
+       "      <td>1112072.5</td>\n",
+       "      <td>379350.625</td>\n",
+       "      <td>0.341120</td>\n",
+       "      <td>0.110318</td>\n",
+       "      <td>11.031820</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                Sales      Profit  Profit_Margin  Sales_Growth  Sales_Growth_%\n",
+       "Year_Month                                                                    \n",
+       "2025-01      966995.0  329540.675       0.340788           NaN             NaN\n",
+       "2025-02      716975.0  241156.500       0.336353     -0.258554      -25.855356\n",
+       "2025-03      995797.5  347240.325       0.348706      0.388887       38.888734\n",
+       "2025-04      893050.0  307050.925       0.343823     -0.103181      -10.318112\n",
+       "2025-05      820145.0  279040.875       0.340234     -0.081636       -8.163597\n",
+       "2025-06      854982.5  300865.250       0.351896      0.042477        4.247724\n",
+       "2025-07      753082.5  261046.700       0.346638     -0.119184      -11.918373\n",
+       "2025-08      960587.5  328937.550       0.342434      0.275541       27.554086\n",
+       "2025-09      834415.0  290717.975       0.348409     -0.131349      -13.134930\n",
+       "2025-10     1028277.5  364606.350       0.354580      0.232333       23.233343\n",
+       "2025-11     1001580.0  341517.975       0.340979     -0.025963       -2.596332\n",
+       "2025-12     1112072.5  379350.625       0.341120      0.110318       11.031820"
+      ]
+     },
+     "execution_count": 96,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_analysis"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 97,
+   "id": "38739b83-2140-4f46-8711-02ed2594c637",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Period('2025-03', 'M')"
+      ]
+     },
+     "execution_count": 97,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_analysis[\"Sales_Growth\"].idxmax()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 98,
+   "id": "6fbafd41-0097-4016-953c-d294e2c6f35b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.float64(0.3888873391680323)"
+      ]
+     },
+     "execution_count": 98,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_analysis[\"Sales_Growth\"].max()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 99,
+   "id": "41ba0889-db3e-48ba-be84-2ec6980a53a1",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Period('2025-02', 'M')"
+      ]
+     },
+     "execution_count": 99,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_analysis[\"Sales_Growth\"].idxmin()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 100,
+   "id": "1cb8d9d2-3e37-4b8f-ac3c-0827d5248bf2",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.float64(-0.25855356025625775)"
+      ]
+     },
+     "execution_count": 100,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "monthly_analysis[\"Sales_Growth\"].min()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 101,
+   "id": "f70f7fb2-06a9-49c1-ba75-1c8676cef8ed",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th>Region</th>\n",
+       "      <th>East</th>\n",
+       "      <th>North</th>\n",
+       "      <th>South</th>\n",
+       "      <th>West</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Year_Month</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>2025-01</th>\n",
+       "      <td>185505.0</td>\n",
+       "      <td>205385.0</td>\n",
+       "      <td>298145.0</td>\n",
+       "      <td>277960.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-02</th>\n",
+       "      <td>106945.0</td>\n",
+       "      <td>121880.0</td>\n",
+       "      <td>264105.0</td>\n",
+       "      <td>224045.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-03</th>\n",
+       "      <td>123295.0</td>\n",
+       "      <td>169390.0</td>\n",
+       "      <td>299352.5</td>\n",
+       "      <td>403760.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-04</th>\n",
+       "      <td>168227.5</td>\n",
+       "      <td>202130.0</td>\n",
+       "      <td>328467.5</td>\n",
+       "      <td>194225.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-05</th>\n",
+       "      <td>145727.5</td>\n",
+       "      <td>107155.0</td>\n",
+       "      <td>319375.0</td>\n",
+       "      <td>247887.5</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-06</th>\n",
+       "      <td>104810.0</td>\n",
+       "      <td>210170.0</td>\n",
+       "      <td>412095.0</td>\n",
+       "      <td>127907.5</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-07</th>\n",
+       "      <td>159945.0</td>\n",
+       "      <td>163140.0</td>\n",
+       "      <td>245802.5</td>\n",
+       "      <td>184195.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-08</th>\n",
+       "      <td>147170.0</td>\n",
+       "      <td>241882.5</td>\n",
+       "      <td>296945.0</td>\n",
+       "      <td>274590.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-09</th>\n",
+       "      <td>139105.0</td>\n",
+       "      <td>176165.0</td>\n",
+       "      <td>332462.5</td>\n",
+       "      <td>186682.5</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-10</th>\n",
+       "      <td>63107.5</td>\n",
+       "      <td>292435.0</td>\n",
+       "      <td>478990.0</td>\n",
+       "      <td>193745.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-11</th>\n",
+       "      <td>100175.0</td>\n",
+       "      <td>122280.0</td>\n",
+       "      <td>590927.5</td>\n",
+       "      <td>188197.5</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-12</th>\n",
+       "      <td>126655.0</td>\n",
+       "      <td>184245.0</td>\n",
+       "      <td>420922.5</td>\n",
+       "      <td>380250.0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "Region          East     North     South      West\n",
+       "Year_Month                                        \n",
+       "2025-01     185505.0  205385.0  298145.0  277960.0\n",
+       "2025-02     106945.0  121880.0  264105.0  224045.0\n",
+       "2025-03     123295.0  169390.0  299352.5  403760.0\n",
+       "2025-04     168227.5  202130.0  328467.5  194225.0\n",
+       "2025-05     145727.5  107155.0  319375.0  247887.5\n",
+       "2025-06     104810.0  210170.0  412095.0  127907.5\n",
+       "2025-07     159945.0  163140.0  245802.5  184195.0\n",
+       "2025-08     147170.0  241882.5  296945.0  274590.0\n",
+       "2025-09     139105.0  176165.0  332462.5  186682.5\n",
+       "2025-10      63107.5  292435.0  478990.0  193745.0\n",
+       "2025-11     100175.0  122280.0  590927.5  188197.5\n",
+       "2025-12     126655.0  184245.0  420922.5  380250.0"
+      ]
+     },
+     "execution_count": 101,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "region_monthly_sales = pd.pivot_table(\n",
+    "    df,\n",
+    "    values=\"Final_Sales\",\n",
+    "    index=\"Year_Month\",\n",
+    "    columns=\"Region\",\n",
+    "    aggfunc=\"sum\"\n",
+    ")\n",
+    "\n",
+    "region_monthly_sales"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 102,
+   "id": "cccbab9c-c937-4cf6-8b23-751427b6f179",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th>Category</th>\n",
+       "      <th>Accessories</th>\n",
+       "      <th>Electronics</th>\n",
+       "      <th>Furniture</th>\n",
+       "      <th>Home Appliances</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Year_Month</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>2025-01</th>\n",
+       "      <td>65397.5</td>\n",
+       "      <td>241687.5</td>\n",
+       "      <td>379970.0</td>\n",
+       "      <td>279940.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-02</th>\n",
+       "      <td>41500.0</td>\n",
+       "      <td>225400.0</td>\n",
+       "      <td>243325.0</td>\n",
+       "      <td>206750.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-03</th>\n",
+       "      <td>87472.5</td>\n",
+       "      <td>216105.0</td>\n",
+       "      <td>449025.0</td>\n",
+       "      <td>243195.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-04</th>\n",
+       "      <td>61092.5</td>\n",
+       "      <td>236017.5</td>\n",
+       "      <td>371705.0</td>\n",
+       "      <td>224235.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-05</th>\n",
+       "      <td>70477.5</td>\n",
+       "      <td>213927.5</td>\n",
+       "      <td>288620.0</td>\n",
+       "      <td>247120.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-06</th>\n",
+       "      <td>72915.0</td>\n",
+       "      <td>198902.5</td>\n",
+       "      <td>411185.0</td>\n",
+       "      <td>171980.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-07</th>\n",
+       "      <td>79430.0</td>\n",
+       "      <td>157937.5</td>\n",
+       "      <td>303630.0</td>\n",
+       "      <td>212085.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-08</th>\n",
+       "      <td>68185.0</td>\n",
+       "      <td>240127.5</td>\n",
+       "      <td>387765.0</td>\n",
+       "      <td>264510.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-09</th>\n",
+       "      <td>83037.5</td>\n",
+       "      <td>202847.5</td>\n",
+       "      <td>348515.0</td>\n",
+       "      <td>200015.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-10</th>\n",
+       "      <td>91625.0</td>\n",
+       "      <td>225822.5</td>\n",
+       "      <td>520795.0</td>\n",
+       "      <td>190035.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-11</th>\n",
+       "      <td>53627.5</td>\n",
+       "      <td>295972.5</td>\n",
+       "      <td>401200.0</td>\n",
+       "      <td>250780.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2025-12</th>\n",
+       "      <td>98232.5</td>\n",
+       "      <td>277045.0</td>\n",
+       "      <td>401890.0</td>\n",
+       "      <td>334905.0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "Category    Accessories  Electronics  Furniture  Home Appliances\n",
+       "Year_Month                                                      \n",
+       "2025-01         65397.5     241687.5   379970.0         279940.0\n",
+       "2025-02         41500.0     225400.0   243325.0         206750.0\n",
+       "2025-03         87472.5     216105.0   449025.0         243195.0\n",
+       "2025-04         61092.5     236017.5   371705.0         224235.0\n",
+       "2025-05         70477.5     213927.5   288620.0         247120.0\n",
+       "2025-06         72915.0     198902.5   411185.0         171980.0\n",
+       "2025-07         79430.0     157937.5   303630.0         212085.0\n",
+       "2025-08         68185.0     240127.5   387765.0         264510.0\n",
+       "2025-09         83037.5     202847.5   348515.0         200015.0\n",
+       "2025-10         91625.0     225822.5   520795.0         190035.0\n",
+       "2025-11         53627.5     295972.5   401200.0         250780.0\n",
+       "2025-12         98232.5     277045.0   401890.0         334905.0"
+      ]
+     },
+     "execution_count": 102,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "category_monthly_sales = pd.pivot_table(\n",
+    "    df,\n",
+    "    values=\"Final_Sales\",\n",
+    "    index=\"Year_Month\",\n",
+    "    columns=\"Category\",\n",
+    "    aggfunc=\"sum\"\n",
+    ")\n",
+    "\n",
+    "category_monthly_sales"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "59a89913-f5df-479a-bb7e-0e12ac82dc63",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.14.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
