@@ -1,0 +1,221 @@
+ Data Evaluation:
+
+import pandas as pd
+import numpy as np
+df = pd.read_csv("retail_sales_analysis_dataset.csv")
+df.head()
+df.tail()
+df.shape
+df.columns
+df.info()
+df.describe()
+df.describe(include="object")
+df.isnull().sum()
+(df.isnull().sum() / len(df)) * 100
+df.duplicated().sum()
+df["Region"].unique()
+df["Region"].nunique()
+df["Region"].value_counts()
+
+2. Data Cleaning:
+
+df["City"] = df["City"].fillna("Unknown")
+df["Discount"] = df["Discount"].fillna(0)
+df = df.drop_duplicates()
+df["Order_Date"] = pd.to_datetime(df["Order_Date"])
+df.info()
+df.isnull().sum()
+
+
+
+
+
+Feature Engineering:
+
+Revenue:
+df["Revenue"] = (
+    df["Quantity"] * df["Unit_Price"]
+)
+Discount Amount:
+df["Discount_Amount"] = (
+    df["Revenue"] * df["Discount"]
+)
+Final Sales:
+df["Final_Sales"] = (
+    df["Revenue"] - df["Discount_Amount"]
+)
+
+
+
+
+
+Exploratory Data Analysis / Business Analysis:
+
+Total Sales:
+total_sales = df["Final_Sales"].sum()
+Total Quantity:
+total_quantity = df["Quantity"].sum()
+Number of Orders:
+number_of_orders = df["Order_ID"].nunique()
+Average Order Value:
+aov = total_sales / number_of_orders
+Sales by Region:
+df.groupby("Region")["Final_Sales"].sum()
+Quantity by Region:
+df.groupby("Region")["Quantity"].sum()
+Sales by Category:
+df.groupby("Category")["Final_Sales"].sum()
+Quantity by Category:
+df.groupby("Category")["Quantity"].sum()
+Sales by Product:
+df.groupby("Product")["Final_Sales"].sum()
+Top 10 Products:
+df.groupby("Product")["Final_Sales"].sum().sort_values(
+    ascending=False
+).head(10)
+Bottom 10 Products:
+df.groupby("Product")["Final_Sales"].sum().sort_values(
+    ascending=True
+).head(10)
+Sales by Payment Mode:
+df.groupby("Payment_Mode")["Final_Sales"].sum()
+Orders by Payment Mode:
+df.groupby("Payment_Mode")["Order_ID"].nunique()
+New vs Returning Customers:
+df.groupby("Customer_Type")["Order_ID"].nunique()
+df.groupby("Customer_Type")["Final_Sales"].sum()
+Top 10 Customers:
+df.groupby(
+    ["Customer_ID", "Customer_Name"]
+)["Final_Sales"].sum().sort_values(
+    ascending=False
+).head(10)
+Category Summary:
+category_analysis = df.groupby("Category").agg(
+    Total_Sales=("Final_Sales", "sum"),
+    Total_Quantity=("Quantity", "sum"),
+    Number_of_Orders=("Order_ID", "nunique")
+)
+
+
+Time-Series Analysis:
+
+
+Extract Year:
+df["Year"] = df["Order_Date"].dt.year
+Extract Month:
+df["Month"] = df["Order_Date"].dt.month
+Extract Month Name:
+df["Month_Name"] = df["Order_Date"].dt.month_name()
+Extract Quarter:
+df["Quarter"] = df["Order_Date"].dt.quarter
+Yearly Sales:
+df.groupby("Year")["Final_Sales"].sum()
+Yearly Quantity:
+df.groupby("Year")["Quantity"].sum()
+Yearly Orders:
+df.groupby("Year")["Order_ID"].nunique()
+Yearly AOV:
+yearly_analysis = df.groupby("Year").agg(
+    Sales=("Final_Sales", "sum"),
+    Orders=("Order_ID", "nunique")
+)
+
+yearly_analysis["AOV"] = (
+    yearly_analysis["Sales"] /
+    yearly_analysis["Orders"]
+)
+Monthly Sales:
+monthly_sales = df.groupby(
+    "Month"
+)["Final_Sales"].sum()
+Monthly Analysis:
+monthly_analysis = df.groupby("Month").agg(
+    Sales=("Final_Sales", "sum"),
+    Orders=("Order_ID", "nunique"),
+    Quantity=("Quantity", "sum")
+)
+Monthly AOV:
+monthly_analysis["AOV"] = (
+    monthly_analysis["Sales"] /
+    monthly_analysis["Orders"]
+)
+Month-over-Month Change:
+monthly_analysis["Sales_Change"] = (
+    monthly_analysis["Sales"].diff()
+)
+Month-over-Month Growth %:
+monthly_analysis["MoM_Growth_%"] = (
+    monthly_analysis["Sales"].pct_change() * 100
+)
+Order Growth %:
+monthly_analysis["Order_Growth_%"] = (
+    monthly_analysis["Orders"].pct_change() * 100
+)
+Quantity Growth %:
+monthly_analysis["Quantity_Growth_%"] = (
+    monthly_analysis["Quantity"].pct_change() * 100
+)
+3-Month Moving Average:
+monthly_analysis["3_Month_Moving_Avg"] = (
+    monthly_analysis["Sales"]
+    .rolling(window=3)
+    .mean()
+)
+Quarterly Sales:
+df.groupby(
+    ["Year", "Quarter"]
+)["Final_Sales"].sum()
+
+
+
+
+Pivot Table Analysis:
+
+
+Region × Category:
+region_category = pd.pivot_table(
+    df,
+    values="Final_Sales",
+    index="Region",
+    columns="Category",
+    aggfunc="sum"
+)
+Region × Month:
+region_month = pd.pivot_table(
+    df,
+    values="Final_Sales",
+    index="Region",
+    columns="Month",
+    aggfunc="sum"
+)
+Category × Month:
+category_month = pd.pivot_table(
+    df,
+    values="Final_Sales",
+    index="Category",
+    columns="Month",
+    aggfunc="sum"
+)
+
+
+
+
+Outlier Analysis:
+
+
+Q1:
+Q1 = df["Final_Sales"].quantile(0.25)
+Q3:
+Q3 = df["Final_Sales"].quantile(0.75)
+IQR:
+IQR = Q3 - Q1
+Lower Bound:
+lower_bound = Q1 - 1.5 * IQR
+Upper Bound:
+upper_bound = Q3 + 1.5 * IQR
+Identify Outliers:
+outliers = df[
+    (df["Final_Sales"] < lower_bound) |
+    (df["Final_Sales"] > upper_bound)
+]
